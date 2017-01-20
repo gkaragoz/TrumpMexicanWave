@@ -1,0 +1,7 @@
+Temp/
+Library/
+*.csproj
+Sailman.io*
+*.sln
+*.sublime-workspace
+*.sublime-project
