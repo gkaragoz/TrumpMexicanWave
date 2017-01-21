@@ -48,6 +48,8 @@ public class GameController : MonoBehaviour
 		_angryCultures = new List<Culture>();
 		_angryCultures.Add( Culture.MUSLIM );
 
+		_camera.SetOnGameEnd(StartGame);
+
 		StartGame();
 	}
 
@@ -56,8 +58,12 @@ public class GameController : MonoBehaviour
         //Reset life for new wave.
         Life = 10;
 
+		//Clear people (if any)
+		_mexiController.ClearWave();
+
         //Set up the people
         _mexiController.InitWave(_angryCultures);
+		Debug.Log("[GameController] Audience resetted!");
 	}
 
     IEnumerator WaitForTrumpTalks(float time)

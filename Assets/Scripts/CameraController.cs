@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -15,12 +16,31 @@ public class CameraController : MonoBehaviour {
     public Image FADE_IN_OUT;
     public bool StartTranslate;
 
+	//THIS IS HERE, NOW
+	//DO NOT JUDGE US
+	//WE ARE NOT HORRIBLE PEOPLE
+	//JUST HORRIBLE PROGRAMMERS
+	//SSH, NO TEARS NOW, ONLY DREAMS
+	private Action _onGameEnd;
+
 	void Start () {
+
+		Reset();
+
+        StartCoroutine(WaitForTrumpTalks(4));
+	}
+
+	private void Reset()
+	{
         StartTranslate = false;
         isFading = false;
 
 		Target.transform.position = Vector3.up * Screen.height * 2f;
-        StartCoroutine(WaitForTrumpTalks(4));
+        Camera.main.transform.position = new Vector3(0, 0, -10);
+	}
+	public void SetOnGameEnd(Action toSet)
+	{
+		_onGameEnd = toSet;
 	}
 	
 	void Update () {
@@ -28,9 +48,13 @@ public class CameraController : MonoBehaviour {
         {
             if (Camera.main.transform.position.x >= EndPosition.transform.position.x)
             {
-                isFading = true;
-                StartTranslate = false;
-                StartCoroutine(CameraZoomOut());
+				Reset();
+                //StartCoroutine(CameraZoomOut());
+
+				if(_onGameEnd != null)
+					_onGameEnd();
+				else
+					Debug.LogError("[ERROR] You didn't set _onGameEnd, ya dingus!");
             }
             if (StartTranslate)
             {

@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MexicanWaver : MonoBehaviour {
+	
+	private GameObject _parent;
+
     public GameObject[,] People;         //People list which is already instantiated to scene.
     public GameObject[] CulturePrefabs;  //Prefabs list from Resources assets folder.
 
@@ -32,10 +35,27 @@ public class MexicanWaver : MonoBehaviour {
         People = new GameObject [ColumnCount, RowCount];
     }
 
+	public void ClearWave()
+	{
+		for(int i = 0; i < ColumnCount; i++)
+		{
+			for(int j = 0; j < RowCount; j++)
+			{
+				if( People[i,j] != null )
+					Destroy( People[i,j] );
+			}
+		}
+
+        People = new GameObject [ColumnCount, RowCount];
+
+		Destroy(_parent);
+	}
+
     public void InitWave(List<Culture> angryCultures, int maxAngries = 10)   //Instantiate every persons depends on ColumnCount and RowCount.
     {
         //Declare parent object for instantiating people to organize hierarchy.
         GameObject parentObject = new GameObject("People");
+		_parent = parentObject;
         parentObject.transform.position = Vector3.zero;
 
         ColumnDistance = Mathf.Sqrt(Mathf.Pow(X_StartPosition.transform.position.x - X_EndPosition.transform.position.x, 2)) / ColumnCount; //Calculate offsets between every persons on columns.
