@@ -31,14 +31,8 @@ public class MexicanWaver : MonoBehaviour {
 
         People = new GameObject [ColumnCount, RowCount];
     }
-
-    public void InitWave(List<Culture> angryCultures)
-    {
-        InitPersons(angryCultures);
-        //RandomCultures(CulturePrefabs[1], RowCount);
-    }
      
-    public void InitPersons(List<Culture> angryCultures)   //Instantiate every persons depends on ColumnCount and RowCount.
+    public void InitWave(List<Culture> angryCultures, int maxAngries = 10)   //Instantiate every persons depends on ColumnCount and RowCount.
     {
         //Declare parent object for instantiating people to organize hierarchy.
         GameObject parentObject = new GameObject("People");
@@ -77,47 +71,6 @@ public class MexicanWaver : MonoBehaviour {
             }
             v3 = new Vector3(X_StartPosition.transform.position.x + x_startPosOffset, X_EndPosition.transform.position.y - y_startPosOffset, 0);     //Reset to start position;
             v3 += new Vector3(ColumnDistance * (ii + 1), 0, 0);     //Set offsets for every Column.
-        }
-    }
-
-    public IEnumerator LeanTween_StandUp()
-    {
-        for (int ii = 0; ii < ColumnCount; ii++)
-        {
-            for (int jj = 0; jj < RowCount; jj++)
-            {
-				//TODO: This should be set by the game controller
-                if (People[ii, jj].name == "Muslim")
-                    continue;
-
-                LeanTween.moveY(
-                    People[ii, jj], 
-                    People[ii, jj].transform.position.y + 0.5f, 
-                    Random.Range(0.25f, 0.5f));
-
-                //Camera.main.GetComponent<CameraController>().Tracking(People[ii, jj]);
-            }
-            yield return new WaitForSeconds(Delay);
-        }
-    }
-
-    public IEnumerator LeanTween_SitDown()
-    {
-        yield return new WaitForSeconds(OnActiveTime);
-
-        for (int ii = 0; ii < ColumnCount; ii++)
-        {
-            for (int jj = 0; jj < RowCount; jj++)
-            {
-                if (People[ii, jj].name == "Muslim")
-                    continue;
-
-                LeanTween.moveY(
-                    People[ii, jj],
-                    People[ii, jj].transform.position.y - 0.5f,
-                    Random.Range(0.25f, 0.5f));
-            }
-            yield return new WaitForSeconds(Delay);
         }
     }
 
