@@ -52,11 +52,52 @@ public class MexicanWaver : MonoBehaviour {
 
         Vector3 v3 = new Vector3(X_StartPosition.transform.position.x + x_startPosOffset, X_EndPosition.transform.position.y - y_startPosOffset, 0); //Start position for Instantiate.
 
+		//The amount of people spawned from angry cultures
+		int spawnedAngries = 0;
+		//The spawn index controls the frequency of spawns to ensure a varied layout of angries
+		//Basically it stops all the angries from potentially spawning in the beginning
+		int spawnIndex = 1000;
+		//The size of the gap in between spawn indexes. You have to wait this much before spawning a new
+		//angry
+		int spawnGap = ColumnCount * RowCount / maxAngries;
+
+		Debug.Log("Starting generation. Spawn gap is: " + spawnGap );
+
         for (int ii = 0; ii < ColumnCount; ii++)
         {
             for (int jj = 0; jj < RowCount; jj++)
             {
+#region Culture Determination
+
+				//Pick a random number to be later cast to a culture
 				int culture = Random.Range(0, CulturePrefabs.Length);
+
+				//The current index of the spawn
+				spawnIndex = ii * RowCount + jj;
+
+				if( angryCultures.Contains( (Culture) culture )  // If we're an angry culture...
+						&& spawnedAngries < maxAngries // ...and we can still spawn angries...
+						&& spawnIndex > spawnGap * spawnedAngries // ... and we haven't spawned an angry recently
+				 )
+				{
+					//Spawn an angry
+					spawnedAngries++;
+
+					//Debug.Log("Spawned a dude. Index is at " + spawnIndex + ". spawnedAngries is at: " + spawnedAngries );
+					//Debug.Log("spawnGap * spawnedAngries = " + spawnGap * spawnedAngries);
+				}
+				else
+				{
+					//If we've already spawned more than 'maxAngries' people from an angry culture
+					//...then lets make sure the culture int represents a happy culture
+					while( angryCultures.Contains((Culture)culture) )
+					{
+						culture++;
+						if( culture >= CulturePrefabs.Length )
+							culture = 0;
+					}
+				}
+#endregion
 
                 GameObject go = Instantiate(CulturePrefabs[culture], v3, Quaternion.identity) as GameObject;
 

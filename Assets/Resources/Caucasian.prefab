@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11448274}
   - 61: {fileID: 6192856}
   m_Layer: 0
-  m_Name: American
+  m_Name: Caucasian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,6 +59,7 @@ MonoBehaviour:
   Delay: 0.2
   StandTime: 0.25
   SitTime: 0.25
+  HatesTrump: 0
 --- !u!212 &21238474
 SpriteRenderer:
   m_ObjectHideFlags: 1
