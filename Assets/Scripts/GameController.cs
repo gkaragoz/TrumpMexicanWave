@@ -32,7 +32,8 @@ public class GameController : MonoBehaviour
 
             if (Life <= 0)
             {
-                //Call Death Method!
+                _camera.Reset();
+                StartGame();
             }
         }
     }
@@ -56,7 +57,7 @@ public class GameController : MonoBehaviour
 	private void ResetAudience()
     {
         //Reset life for new wave.
-        Life = 10;
+        Life = 2;
 
 		//Clear people (if any)
 		_mexiController.ClearWave();

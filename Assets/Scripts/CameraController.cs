@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour {
         StartCoroutine(WaitForTrumpTalks(4));
 	}
 
-	private void Reset()
+	public void Reset()
 	{
         StartTranslate = false;
         isFading = false;
