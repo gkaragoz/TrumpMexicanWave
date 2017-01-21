@@ -31,7 +31,11 @@ public class ViewerController : MonoBehaviour
 
 	void Update ()
 	{
-        //Control die.
+        if(Mathf.Abs(transform.position.x - Camera.main.transform.position.x + 4.5f) <= 2.34f && HatesTrump == true && Camera.main.GetComponent<CameraController>().StartTranslate)
+        {
+            Debug.Log(Mathf.Abs(transform.position.x - Camera.main.transform.position.x + 4.5f));
+            Destroy(gameObject);
+        }
 	}
 
 	void OnTriggerEnter2D(Collider2D thingThatHitMe)
