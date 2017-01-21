@@ -11,8 +11,6 @@ public class MexicanWaver : MonoBehaviour {
     public GameObject Y_StartPosition;
     public GameObject Y_EndPosition;
 
-    public float distance;
-
     public int ColumnCount = 5;         //Defined as columns count for Mexican Wavers.
     public int RowCount = 4;            //Defined as rows count for Mexican Wavers.
     public float ColumnDistance;        //Offset columns between every 2 person.
@@ -25,7 +23,6 @@ public class MexicanWaver : MonoBehaviour {
 
     void Awake()
     {
-        distance = Random.Range(0.5f, 1f);
         //INITIALIZING START - END POINTS REFERENCES.
         X_StartPosition = GameObject.Find("X_START_POSITION");
         X_EndPosition   = GameObject.Find("X_END_POSITION");
@@ -33,17 +30,6 @@ public class MexicanWaver : MonoBehaviour {
         Y_EndPosition   = GameObject.Find("Y_END_POSITION");
 
         People = new GameObject [ColumnCount, RowCount];
-    }
-
-    void MakeRandomCulture(GameObject culturePrefab, int count)
-    {
-        for (int ii = 0; ii < ColumnCount; ii++)
-        {
-            for (int jj = 0; jj < RowCount; jj++)
-            {
-
-            }
-        }
     }
 
     void Start()
@@ -86,7 +72,7 @@ public class MexicanWaver : MonoBehaviour {
         }
     }
 
-    public IEnumerator iTween_StandUp()
+    public IEnumerator LeanTween_StandUp()
     {
         for (int ii = 0; ii < ColumnCount; ii++)
         {
@@ -94,14 +80,16 @@ public class MexicanWaver : MonoBehaviour {
             {
                 LeanTween.moveY(
                     People[ii, jj], 
-                    People[ii, jj].transform.position.y + distance, 
+                    People[ii, jj].transform.position.y + 0.5f, 
                     Random.Range(0.5f, 1.0f));
+
+                Camera.main.GetComponent<CameraController>().Tracking(People[ii, jj]);
             }
             yield return new WaitForSeconds(Delay);
         }
     }
 
-    public IEnumerator iTween_SitDown()
+    public IEnumerator LeanTween_SitDown()
     {
         yield return new WaitForSeconds(OnActiveTime);
 
@@ -111,7 +99,7 @@ public class MexicanWaver : MonoBehaviour {
             {
                 LeanTween.moveY(
                     People[ii, jj],
-                    People[ii, jj].transform.position.y - distance,
+                    People[ii, jj].transform.position.y - 0.5f,
                     Random.Range(0.5f, 1.0f));
             }
             yield return new WaitForSeconds(Delay);
