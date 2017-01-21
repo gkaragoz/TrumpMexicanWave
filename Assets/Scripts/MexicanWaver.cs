@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class MexicanWaver : MonoBehaviour {
     public GameObject[,] People;         //People list which is already instantiated to scene.
-    public GameObject[] CulturePrefabs; //Prefabs list from Resources assets folder.
+    public GameObject[] CulturePrefabs;  //Prefabs list from Resources assets folder.
 
     public GameObject X_StartPosition;
     public GameObject X_EndPosition;
@@ -35,13 +35,23 @@ public class MexicanWaver : MonoBehaviour {
         People = new GameObject [ColumnCount, RowCount];
     }
 
+    void MakeRandomCulture(GameObject culturePrefab, int count)
+    {
+        for (int ii = 0; ii < ColumnCount; ii++)
+        {
+            for (int jj = 0; jj < RowCount; jj++)
+            {
+
+            }
+        }
+    }
+
     void Start()
     {
         InitPersons();
-        StartCoroutine(iTween_StandUp());
-        StartCoroutine(iTween_SitDown());
+        GenerateUniqueRandomNumbers(ColumnCount);
     }
-
+     
     public void InitPersons()   //Instantiate every persons depends on ColumnCount and RowCount.
     {
         //Declare parent object for instantiating people to organize hierarchy.
@@ -66,7 +76,7 @@ public class MexicanWaver : MonoBehaviour {
         {
             for (int jj = 0; jj < RowCount; jj++)
             {
-                GameObject go = Instantiate(CulturePrefabs[Random.Range(0, CulturePrefabs.Length)], v3, Quaternion.identity) as GameObject;
+                GameObject go = Instantiate(CulturePrefabs[Random.Range(0,CulturePrefabs.Length)], v3, Quaternion.identity) as GameObject;
                 People[ii, jj] = go;
                 go.transform.SetParent(parentObject.transform);     //Set parent for organize hierarchy.
                 v3 += new Vector3(0, RowDistance, 0);               //Set offsets for every Row.
@@ -76,22 +86,22 @@ public class MexicanWaver : MonoBehaviour {
         }
     }
 
-    IEnumerator iTween_StandUp()
+    public IEnumerator iTween_StandUp()
     {
         for (int ii = 0; ii < ColumnCount; ii++)
         {
             for (int jj = 0; jj < RowCount; jj++)
             {
-                iTween.MoveTo(People[ii, jj], iTween.Hash(
-                    "y", People[ii, jj].transform.position.y + distance,
-                    "time", Random.Range(0.5f, 2.5f)
-                    ));
+                LeanTween.moveY(
+                    People[ii, jj], 
+                    People[ii, jj].transform.position.y + distance, 
+                    Random.Range(0.5f, 1.0f));
             }
             yield return new WaitForSeconds(Delay);
         }
     }
 
-    IEnumerator iTween_SitDown()
+    public IEnumerator iTween_SitDown()
     {
         yield return new WaitForSeconds(OnActiveTime);
 
@@ -99,12 +109,38 @@ public class MexicanWaver : MonoBehaviour {
         {
             for (int jj = 0; jj < RowCount; jj++)
             {
-                iTween.MoveTo(People[ii, jj], iTween.Hash(
-                    "y", People[ii, jj].transform.position.y - distance,
-                    "time", Random.Range(0.5f, 2.5f)
-                    ));
+                LeanTween.moveY(
+                    People[ii, jj],
+                    People[ii, jj].transform.position.y - distance,
+                    Random.Range(0.5f, 1.0f));
             }
             yield return new WaitForSeconds(Delay);
         }
+    }
+
+    public List <int> GenerateUniqueRandomNumbers(int maxCount)
+    {
+        List <int> uniques = new List<int>();
+        for (int ii = 0; ii < maxCount; ii++)
+        {
+            int rand = 0;
+            bool success = false;
+            do
+            {
+                rand = Random.Range(0, maxCount);
+
+                if (uniques.Count <= 0 || !uniques.Contains(rand))
+                {
+                    if (uniques.Count <= 0)
+                        break;
+
+                    success = true;
+                    break;
+                }
+            } while (!success);
+
+            uniques.Add(rand);
+        }
+        return uniques;
     }
 }
