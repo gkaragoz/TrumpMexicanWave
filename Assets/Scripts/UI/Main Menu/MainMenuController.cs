@@ -6,6 +6,7 @@ public class MainMenuController : MonoBehaviour
 {
 	public void LoadGameScene()
 	{
+		AudioController.Instance.PlayEffect( Effect.UI_TAP );
 		SceneManager.LoadScene( "MainScene" );
 	}
 
