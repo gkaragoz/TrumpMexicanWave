@@ -32,7 +32,7 @@ public class MexicanWaver : MonoBehaviour {
         People = new GameObject [ColumnCount, RowCount];
     }
      
-    public void InitWave(List<Culture> angryCultures, int maxAngries = 3)   //Instantiate every persons depends on ColumnCount and RowCount.
+    public void InitWave(List<Culture> angryCultures, int maxAngries = 5)   //Instantiate every persons depends on ColumnCount and RowCount.
     {
         //Declare parent object for instantiating people to organize hierarchy.
         GameObject parentObject = new GameObject("People");
@@ -54,17 +54,37 @@ public class MexicanWaver : MonoBehaviour {
 
 		//The amount of people spawned from angry cultures
 		int spawnedAngries = 0;
+		//The spawn index controls the frequency of spawns to ensure a varied layout of angries
+		//Basically it stops all the angries from potentially spawning in the beginning
+		int spawnIndex = 1000;
+		//The size of the gap in between spawn indexes. You have to wait this much before spawning a new
+		//angry
+		int spawnGap = ColumnCount * RowCount / maxAngries;
+
+		Debug.Log("Starting generation. Spawn gap is: " + spawnGap );
 
         for (int ii = 0; ii < ColumnCount; ii++)
         {
             for (int jj = 0; jj < RowCount; jj++)
             {
+#region Culture Determination
+
 				//Pick a random number to be later cast to a culture
 				int culture = Random.Range(0, CulturePrefabs.Length);
 
-				if( angryCultures.Contains( (Culture) culture ) && spawnedAngries <= maxAngries )
+				//The current index of the spawn
+				spawnIndex = ii * RowCount + jj;
+
+				if( angryCultures.Contains( (Culture) culture )  // If we're an angry culture...
+						&& spawnedAngries < maxAngries // ...and we can still spawn angries...
+						&& spawnIndex > spawnGap * spawnedAngries // ... and we haven't spawned an angry recently
+				 )
 				{
+					//Spawn an angry
 					spawnedAngries++;
+
+					//Debug.Log("Spawned a dude. Index is at " + spawnIndex + ". spawnedAngries is at: " + spawnedAngries );
+					//Debug.Log("spawnGap * spawnedAngries = " + spawnGap * spawnedAngries);
 				}
 				else
 				{
@@ -77,6 +97,7 @@ public class MexicanWaver : MonoBehaviour {
 							culture = 0;
 					}
 				}
+#endregion
 
                 GameObject go = Instantiate(CulturePrefabs[culture], v3, Quaternion.identity) as GameObject;
 
