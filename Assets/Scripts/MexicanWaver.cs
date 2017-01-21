@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class MexicanWaver : MonoBehaviour {
     public GameObject[,] People;         //People list which is already instantiated to scene.
     public GameObject[] CulturePrefabs;  //Prefabs list from Resources assets folder.
+    public Dictionary<Culture,GameObject> CulturePrefabbies;  //Prefabs list from Resources assets folder.
 
     public GameObject X_StartPosition;
     public GameObject X_EndPosition;

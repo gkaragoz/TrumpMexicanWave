@@ -114,9 +114,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CulturePrefabs:
-  - {fileID: 158676, guid: 2b9742e9fbb14ab49892e09db9c4a16e, type: 2}
-  - {fileID: 158676, guid: 06d72e2d9d7478d4ab486a2920d3dab8, type: 2}
+  - {fileID: 158676, guid: 3cca068a011a54f1d9430947c187326f, type: 2}
   - {fileID: 158676, guid: 82847546029ce4647829a3510ca79885, type: 2}
+  - {fileID: 158676, guid: c9647f821e8d14a848d32c8170b80a3a, type: 2}
+  - {fileID: 158676, guid: 24313c45e08d14b629abd3f0393f141a, type: 2}
+  - {fileID: 158676, guid: 06d72e2d9d7478d4ab486a2920d3dab8, type: 2}
+  - {fileID: 158676, guid: c775aabf84c3942d882c76ef363bca50, type: 2}
   X_StartPosition: {fileID: 1284948281}
   X_EndPosition: {fileID: 1615721837}
   Y_StartPosition: {fileID: 1985294632}

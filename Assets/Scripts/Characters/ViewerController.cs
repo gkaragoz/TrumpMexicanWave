@@ -7,7 +7,8 @@ public enum Culture
 	MEXICAN = 1,
 	AFRICANAMERICAN = 2,
 	LIBERAL = 3,
-	MUSLIM = 4
+	MUSLIM = 4,
+	WOMEN = 5
 }
 
 public class ViewerController : MonoBehaviour
