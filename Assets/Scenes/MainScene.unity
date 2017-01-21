@@ -120,7 +120,7 @@ MonoBehaviour:
   X_EndPosition: {fileID: 1615721837}
   Y_StartPosition: {fileID: 1985294632}
   Y_EndPosition: {fileID: 1445862105}
-  ColumnCount: 300
+  ColumnCount: 100
   RowCount: 5
   ColumnDistance: 0
   RowDistance: 0

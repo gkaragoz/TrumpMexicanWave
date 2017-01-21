@@ -35,7 +35,7 @@ public class MexicanWaver : MonoBehaviour {
     void Start()
     {
         InitPersons();
-        GenerateUniqueRandomNumbers(ColumnCount);
+        RandomCultures(CulturePrefabs[1], RowCount);
     }
      
     public void InitPersons()   //Instantiate every persons depends on ColumnCount and RowCount.
@@ -52,8 +52,8 @@ public class MexicanWaver : MonoBehaviour {
         float y_startPosOffset = 0; //Offset for start position on Y axis.
 
         //X - Y Maths.
-        x_startPosOffset = ColumnDistance / 2;
-        y_startPosOffset = (RowCount - 1) * RowDistance / 2;
+        x_startPosOffset = ColumnDistance * 0.5f;
+        y_startPosOffset = (RowCount - 1) * RowDistance * 0.5f;
         #endregion
 
         Vector3 v3 = new Vector3(X_StartPosition.transform.position.x + x_startPosOffset, X_EndPosition.transform.position.y - y_startPosOffset, 0); //Start position for Instantiate.
@@ -62,13 +62,33 @@ public class MexicanWaver : MonoBehaviour {
         {
             for (int jj = 0; jj < RowCount; jj++)
             {
-                GameObject go = Instantiate(CulturePrefabs[Random.Range(0,CulturePrefabs.Length)], v3, Quaternion.identity) as GameObject;
+                GameObject go = Instantiate(CulturePrefabs[0], v3, Quaternion.identity) as GameObject;
                 People[ii, jj] = go;
+                go.name = CulturePrefabs[0].name;
                 go.transform.SetParent(parentObject.transform);     //Set parent for organize hierarchy.
                 v3 += new Vector3(0, RowDistance, 0);               //Set offsets for every Row.
             }
             v3 = new Vector3(X_StartPosition.transform.position.x + x_startPosOffset, X_EndPosition.transform.position.y - y_startPosOffset, 0);     //Reset to start position;
             v3 += new Vector3(ColumnDistance * (ii + 1), 0, 0);     //Set offsets for every Column.
+        }
+    }
+
+    void RandomCultures(GameObject culturePrefab, int count)
+    {
+        List<int> RandomsColumn = GenerateUniqueRandomNumbers(ColumnCount);
+        List<int> RandomsRow = GenerateUniqueRandomNumbers(RowCount);
+
+        int counter = 0;
+
+        for (int ii = 0; ii < count; ii++)
+        {
+            Debug.Log("Will delete:" + People[RandomsColumn[counter], RandomsRow[counter]] + " \t " + " randomsColumn[counter] " + RandomsColumn[counter] + " }t " + " randomsRow[counter] " + RandomsRow[counter]);
+
+            Vector3 position = People[RandomsColumn[counter], RandomsRow[counter]].transform.position;
+            Destroy(People[RandomsColumn[counter], RandomsRow[counter]]);
+            People[(RandomsColumn[counter]), RandomsRow[counter]] = Instantiate(culturePrefab, position, Quaternion.identity) as GameObject;
+            People[(RandomsColumn[counter]), RandomsRow[counter]].name = culturePrefab.name;
+            counter++;
         }
     }
 
@@ -78,10 +98,13 @@ public class MexicanWaver : MonoBehaviour {
         {
             for (int jj = 0; jj < RowCount; jj++)
             {
+                if (People[ii, jj].name == "Muslim")
+                    continue;
+
                 LeanTween.moveY(
                     People[ii, jj], 
                     People[ii, jj].transform.position.y + 0.5f, 
-                    Random.Range(0.5f, 1.0f));
+                    Random.Range(0.25f, 0.5f));
 
                 Camera.main.GetComponent<CameraController>().Tracking(People[ii, jj]);
             }
@@ -97,10 +120,13 @@ public class MexicanWaver : MonoBehaviour {
         {
             for (int jj = 0; jj < RowCount; jj++)
             {
+                if (People[ii, jj].name == "Muslim")
+                    continue;
+
                 LeanTween.moveY(
                     People[ii, jj],
                     People[ii, jj].transform.position.y - 0.5f,
-                    Random.Range(0.5f, 1.0f));
+                    Random.Range(0.25f, 0.5f));
             }
             yield return new WaitForSeconds(Delay);
         }

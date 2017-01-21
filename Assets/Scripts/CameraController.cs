@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour {
                 {
                     Vector3 point = Camera.main.WorldToViewportPoint(Target.position);
                     Vector3 delta = Target.position - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z)); //(new Vector3(0.5, 0.5, point.z));
-                    Vector3 destination = transform.position + delta + Vector3.right;
+                    Vector3 destination = transform.position + delta + (Vector3.right * 0.5f);
                     transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
                 }
             }
@@ -135,8 +135,5 @@ public class CameraController : MonoBehaviour {
     public void Tracking(GameObject person)
     {
         Target.transform.position = new Vector3(person.transform.position.x, MW.X_StartPosition.transform.position.y, Target.transform.position.z);
-        //Camera.main.transform.position = new Vector3(person.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
-
-        //Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Target.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z), 2f);
     }
 }
