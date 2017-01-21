@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameController : MonoBehaviour
 
 	[SerializeField]
 	private MexicanWaver _mexiController;
+
+	private List<Culture> _angryCultures;
 
 	private void StartGame()
 	{
@@ -18,6 +21,9 @@ public class GameController : MonoBehaviour
 
 	void Start ()
 	{
+		_angryCultures = new List<Culture>();
+		_angryCultures.Add( Culture.MUSLIM );
+
 		StartGame();
 	}
 
@@ -29,7 +35,7 @@ public class GameController : MonoBehaviour
 	private void ResetAudience()
 	{
 		//Set up the people
-		_mexiController.InitWave();
+		_mexiController.InitWave(_angryCultures);
 	}
 
     IEnumerator WaitForTrumpTalks(float time)

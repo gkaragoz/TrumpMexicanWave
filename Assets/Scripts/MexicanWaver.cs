@@ -32,13 +32,13 @@ public class MexicanWaver : MonoBehaviour {
         People = new GameObject [ColumnCount, RowCount];
     }
 
-    public void InitWave()
+    public void InitWave(List<Culture> angryCultures)
     {
-        InitPersons();
+        InitPersons(angryCultures);
         //RandomCultures(CulturePrefabs[1], RowCount);
     }
      
-    public void InitPersons()   //Instantiate every persons depends on ColumnCount and RowCount.
+    public void InitPersons(List<Culture> angryCultures)   //Instantiate every persons depends on ColumnCount and RowCount.
     {
         //Declare parent object for instantiating people to organize hierarchy.
         GameObject parentObject = new GameObject("People");
@@ -65,6 +65,12 @@ public class MexicanWaver : MonoBehaviour {
 				int culture = Random.Range(0, CulturePrefabs.Length);
 
                 GameObject go = Instantiate(CulturePrefabs[culture], v3, Quaternion.identity) as GameObject;
+
+				//Let them know if they're angry
+				var viewerController = go.GetComponent<ViewerController>();
+				if( angryCultures.Contains( viewerController.ActiveCulture ) )
+				   viewerController.HatesTrump = true;
+
                 People[ii, jj] = go;
                 go.transform.SetParent(parentObject.transform);     //Set parent for organize hierarchy.
                 v3 += new Vector3(0, RowDistance, 0);               //Set offsets for every Row.

@@ -27,6 +27,8 @@ public class ViewerController : MonoBehaviour
 	public float StandTime = 0.25f;
 	public float SitTime = 0.25f;
 
+	public bool HatesTrump = false;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -42,7 +44,8 @@ public class ViewerController : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D thingThatHitMe)
 	{
 		//Debug.Log("Ow, my face");
-		StandUpThenDown();
+		if( !HatesTrump )
+			StandUpThenDown();
 	}
 
 	public void StandUpThenDown()
@@ -64,7 +67,6 @@ public class ViewerController : MonoBehaviour
 
 	public void SitDown()
 	{
-		Debug.Log("THER SEE ME SITTING");
 		LeanTween.moveY(
 			gameObject,
 			transform.position.y - 0.25f,
