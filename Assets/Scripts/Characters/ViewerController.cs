@@ -23,6 +23,10 @@ public class ViewerController : MonoBehaviour
 		}
 	}
 
+	public float Delay = 0.2f;
+	public float StandTime = 0.25f;
+	public float SitTime = 0.25f;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -35,6 +39,21 @@ public class ViewerController : MonoBehaviour
 
 	}
 
+	void OnTriggerEnter2D(Collider2D thingThatHitMe)
+	{
+		//Debug.Log("Ow, my face");
+		StandUpThenDown();
+	}
+
+	public void StandUpThenDown()
+	{
+		LeanTween.moveY(
+			gameObject, 
+			transform.position.y + 0.25f, 
+			Random.Range(StandTime, StandTime + StandTime * 1.2f))
+			.setOnComplete( SitDown );
+	}
+
 	public void StandUp()
 	{
 		LeanTween.moveY(
@@ -45,9 +64,11 @@ public class ViewerController : MonoBehaviour
 
 	public void SitDown()
 	{
+		Debug.Log("THER SEE ME SITTING");
 		LeanTween.moveY(
 			gameObject,
-			transform.position.y - 0.5f,
-			Random.Range(0.25f, 0.5f));
+			transform.position.y - 0.25f,
+			SitTime)
+			.setDelay( Delay );
 	}
 }

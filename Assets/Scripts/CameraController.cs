@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour {
         StartTranslate = false;
         isFading = false;
 
+		Target.transform.position = Vector3.up * Screen.height * 2f;
         StartCoroutine(WaitForTrumpTalks(4));
 	}
 	
@@ -40,7 +41,7 @@ public class CameraController : MonoBehaviour {
                     Vector3 point = Camera.main.WorldToViewportPoint(Target.position);
                     Vector3 delta = Target.position - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z)); //(new Vector3(0.5, 0.5, point.z));
                     Vector3 destination = transform.position + delta + (Vector3.right * 0.5f);
-                    transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
+                    transform.position = Vector3.SmoothDamp(transform.position, destination + Vector3.right * 0.5f, ref velocity, dampTime);
                 }
             }
         }
@@ -147,6 +148,6 @@ public class CameraController : MonoBehaviour {
 
     public void Tracking()
     {
-        Target.transform.position += Vector3.right * 1f * Time.deltaTime;
+        Target.transform.position += Vector3.right * 1.25f * Time.deltaTime;
     }
 }

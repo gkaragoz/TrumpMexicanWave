@@ -488,6 +488,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1094996396}
+  - 61: {fileID: 1094996397}
+  - 50: {fileID: 1094996398}
   m_Layer: 0
   m_Name: TrackingBall
   m_TagString: Untagged
@@ -507,6 +509,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!61 &1094996397
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1094996395}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.18963212, y: -0.018622637}
+  serializedVersion: 2
+  m_Size: {x: 1.3792642, y: 5.9907374}
+--- !u!50 &1094996398
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1094996395}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6
 --- !u!1 &1284948281
 GameObject:
   m_ObjectHideFlags: 0
