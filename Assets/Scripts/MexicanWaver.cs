@@ -61,7 +61,7 @@ public class MexicanWaver : MonoBehaviour {
 		//angry
 		int spawnGap = ColumnCount * RowCount / maxAngries;
 
-		Debug.Log("Starting generation. Spawn gap is: " + spawnGap );
+		//Debug.Log("Starting generation. Spawn gap is: " + spawnGap );
 
         for (int ii = 0; ii < ColumnCount; ii++)
         {

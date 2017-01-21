@@ -32,10 +32,13 @@ public class ViewerController : MonoBehaviour
 
 	void Update ()
 	{
-        if(Mathf.Abs(transform.position.x - Camera.main.transform.position.x + 4.5f) <= 2.34f && HatesTrump == true && Camera.main.GetComponent<CameraController>().StartTranslate)
+        if(Mathf.Abs(transform.position.x - Camera.main.transform.position.x + 4.5f) <= 2.34f && 
+            HatesTrump == true && 
+            Camera.main.GetComponent<CameraController>().StartTranslate && 
+            GetComponent<BoxCollider2D>().isActiveAndEnabled == true)
         {
-            Debug.Log(Mathf.Abs(transform.position.x - Camera.main.transform.position.x + 4.5f));
-            Destroy(gameObject);
+            GetComponent<BoxCollider2D>().enabled = false;
+            GameObject.Find("GameManager").GetComponent<GameController>().Life--;
         }
 	}
 

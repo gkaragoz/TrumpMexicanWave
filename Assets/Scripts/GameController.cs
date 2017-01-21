@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -12,11 +13,34 @@ public class GameController : MonoBehaviour
 
 	private List<Culture> _angryCultures;
 
-	private void StartGame()
+    public Text Txt_PlayerLife;
+
+    [SerializeField]
+    private int _life;
+
+    public int Life
+    {
+        get
+        {
+            return _life;
+        }
+
+        set
+        {
+            _life = value;
+            Txt_PlayerLife.text = " Life: " + _life;
+
+            if (Life <= 0)
+            {
+                //Call Death Method!
+            }
+        }
+    }
+
+    private void StartGame()
 	{
 		ResetAudience();
 		StartCoroutine( WaitForTrumpTalks( 4f ) );
-
 	}
 
 	void Start ()
@@ -27,15 +51,13 @@ public class GameController : MonoBehaviour
 		StartGame();
 	}
 
-	void Update ()
-	{
-
-	}
-
 	private void ResetAudience()
-	{
-		//Set up the people
-		_mexiController.InitWave(_angryCultures);
+    {
+        //Reset life for new wave.
+        Life = 10;
+
+        //Set up the people
+        _mexiController.InitWave(_angryCultures);
 	}
 
     IEnumerator WaitForTrumpTalks(float time)
