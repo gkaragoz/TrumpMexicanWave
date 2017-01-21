@@ -33,6 +33,8 @@ public class CameraController : MonoBehaviour {
             }
             if (StartTranslate)
             {
+				Tracking();
+
                 if (Target != null)
                 {
                     Vector3 point = Camera.main.WorldToViewportPoint(Target.position);
@@ -93,9 +95,10 @@ public class CameraController : MonoBehaviour {
         yield return new WaitForSeconds(2);
 
         StartTranslate = true;
+        Target.transform.position = transform.position;
 
-        StartCoroutine(MW.LeanTween_StandUp());
-        StartCoroutine(MW.LeanTween_SitDown());
+        //StartCoroutine(MW.LeanTween_StandUp());
+        //StartCoroutine(MW.LeanTween_SitDown());
     }
 
     IEnumerator CameraZoomIn()
@@ -132,8 +135,18 @@ public class CameraController : MonoBehaviour {
         StartCoroutine(CameraZoomIn());
     }
 
+	public void StartCameraZoom()
+	{
+        StartCoroutine(CameraZoomIn());
+	}
+
     public void Tracking(GameObject person)
     {
         Target.transform.position = new Vector3(person.transform.position.x, MW.X_StartPosition.transform.position.y, Target.transform.position.z);
+    }
+
+    public void Tracking()
+    {
+        Target.transform.position += Vector3.right * 1f * Time.deltaTime;
     }
 }
