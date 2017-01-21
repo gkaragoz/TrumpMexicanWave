@@ -7,3 +7,4 @@ Sailman.io*
 *.sublime-project
 *.DS_Store
 */*.DS_Store
+*.userprefs
