@@ -28,8 +28,8 @@ public class MexicanWaver : MonoBehaviour {
 
     public void InitPersons()   //Instantiate every persons depends on ColumnCount and RowCount.
     {
-        ColumnDistance = Vector3.Distance(X_StartPosition.transform.position, X_EndPosition.transform.position) / ColumnCount;  //Calculate offsets between every persons on columns.
-        RowDistance = Vector3.Distance(Y_StartPosition.transform.position, Y_EndPosition.transform.position) / RowCount;        //Calculate offsets between every persons on rows.
+        ColumnDistance = Mathf.Sqrt(Mathf.Pow(X_StartPosition.transform.position.x - X_EndPosition.transform.position.x, 2)) / ColumnCount; //Calculate offsets between every persons on columns.
+        RowDistance = Mathf.Sqrt(Mathf.Pow(Y_StartPosition.transform.position.y - Y_EndPosition.transform.position.y, 2)) / RowCount;       //Calculate offsets between every persons on rows.
 
         #region Allignment
         float x_startPosOffset; //Offset for start position on X axis.
