@@ -29,16 +29,9 @@ public class ViewerController : MonoBehaviour
 
 	public bool HatesTrump = false;
 
-	// Use this for initialization
-	void Start ()
-	{
-
-	}
-
-	// Update is called once per frame
 	void Update ()
 	{
-
+        //Control die.
 	}
 
 	void OnTriggerEnter2D(Collider2D thingThatHitMe)

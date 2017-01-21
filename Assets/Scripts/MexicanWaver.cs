@@ -31,7 +31,7 @@ public class MexicanWaver : MonoBehaviour {
 
         People = new GameObject [ColumnCount, RowCount];
     }
-     
+
     public void InitWave(List<Culture> angryCultures, int maxAngries = 10)   //Instantiate every persons depends on ColumnCount and RowCount.
     {
         //Declare parent object for instantiating people to organize hierarchy.
