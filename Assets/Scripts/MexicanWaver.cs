@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class MexicanWaver : MonoBehaviour {
     public GameObject[,] People;         //People list which is already instantiated to scene.
     public GameObject[] CulturePrefabs;  //Prefabs list from Resources assets folder.
-    public Dictionary<Culture,GameObject> CulturePrefabbies;  //Prefabs list from Resources assets folder.
 
     public GameObject X_StartPosition;
     public GameObject X_EndPosition;
@@ -33,7 +32,7 @@ public class MexicanWaver : MonoBehaviour {
         People = new GameObject [ColumnCount, RowCount];
     }
      
-    public void InitWave(List<Culture> angryCultures, int maxAngries = 10)   //Instantiate every persons depends on ColumnCount and RowCount.
+    public void InitWave(List<Culture> angryCultures, int maxAngries = 3)   //Instantiate every persons depends on ColumnCount and RowCount.
     {
         //Declare parent object for instantiating people to organize hierarchy.
         GameObject parentObject = new GameObject("People");
@@ -53,11 +52,31 @@ public class MexicanWaver : MonoBehaviour {
 
         Vector3 v3 = new Vector3(X_StartPosition.transform.position.x + x_startPosOffset, X_EndPosition.transform.position.y - y_startPosOffset, 0); //Start position for Instantiate.
 
+		//The amount of people spawned from angry cultures
+		int spawnedAngries = 0;
+
         for (int ii = 0; ii < ColumnCount; ii++)
         {
             for (int jj = 0; jj < RowCount; jj++)
             {
+				//Pick a random number to be later cast to a culture
 				int culture = Random.Range(0, CulturePrefabs.Length);
+
+				if( angryCultures.Contains( (Culture) culture ) && spawnedAngries <= maxAngries )
+				{
+					spawnedAngries++;
+				}
+				else
+				{
+					//If we've already spawned more than 'maxAngries' people from an angry culture
+					//...then lets make sure the culture int represents a happy culture
+					while( angryCultures.Contains((Culture)culture) )
+					{
+						culture++;
+						if( culture >= CulturePrefabs.Length )
+							culture = 0;
+					}
+				}
 
                 GameObject go = Instantiate(CulturePrefabs[culture], v3, Quaternion.identity) as GameObject;
 
