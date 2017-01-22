@@ -69,7 +69,6 @@ public class ViewerController : MonoBehaviour
 
 	public void SitDown()
 	{
-		Debug.Log("Sitting down, with a delay of: " + Delay);
 		LeanTween.delayedCall( Delay, () =>
 			LeanTween.moveY(
 				gameObject,

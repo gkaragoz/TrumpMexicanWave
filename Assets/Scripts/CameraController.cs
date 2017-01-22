@@ -29,7 +29,8 @@ public class CameraController : MonoBehaviour {
 
 		Reset();
 
-        StartCoroutine(WaitForTrumpTalks(4));
+        GameObject.Find("GameManager").GetComponent<GameController>().CallClickableNewspaper();
+        //StartCoroutine(WaitForTrumpTalks(4));
 	}
 
 	public void Reset()

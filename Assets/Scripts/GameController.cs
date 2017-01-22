@@ -56,7 +56,9 @@ public class GameController : MonoBehaviour
         Camera.main.orthographicSize = 5;
 		_fader.interactable = false;
 		ResetAudience();
-		StartCoroutine( WaitForTrumpTalks( 4f ) );
+
+        if (_gameInProgress)
+            CallClickableNewspaper();
 
         _gameOver = false;
 		_gameInProgress = true;
@@ -107,33 +109,37 @@ public class GameController : MonoBehaviour
 	{
 		_gameInProgress = false;
 		
-		//Fade out to black
-		_camera.StartFadeInCor();
-		_fader.interactable = true;
+        CallClickableNewspaper();
 
-		//We don't want to call this from camera
-		//So we'll just use the magic number 1.0f
-		//which is the duration of the fade out 
-		//coroutine
-		LeanTween.delayedCall( 1.0f,
-				() =>
-				{
-					if(Newspaper.Instance != null)
+		ESCALATE();
+	}
+
+    public void CallClickableNewspaper()
+    {
+        //Fade out to black
+        _camera.StartFadeInCor();
+        _fader.interactable = true;
+
+        //We don't want to call this from camera
+        //So we'll just use the magic number 1.0f
+        //which is the duration of the fade out 
+        //coroutine
+        LeanTween.delayedCall(1.0f,
+                () =>
+                {
+                    if (Newspaper.Instance != null)
                     {
                         if (_gameOver)
                         {
                             _camera.StartTranslate = false;
                             Txt_PlayerLife.text = "";
-						    Newspaper.Instance.Show(3f, "Game over!", "You loss!");
+                            Newspaper.Instance.Show(3f, "Game over!", "You loss!");
                         }
                         else //Depends on haters cultures.
                             Newspaper.Instance.Show(3f, "Trump does it again!", "Blacks outraged!");
                     }
                 });
-
-		ESCALATE();
-
-	}
+    }
 
 	//After fading out, the user taps the
 	//newspaper to start the next wave
@@ -148,9 +154,11 @@ public class GameController : MonoBehaviour
 
         _gameInProgress = false;
 		StartGame();
-		_camera.StartFadeOutCor();
+        StartCoroutine(WaitForTrumpTalks(4f));
 
-		if(Newspaper.Instance != null)
+        _camera.StartFadeOutCor();
+
+        if (Newspaper.Instance != null)
                 Newspaper.Instance.Hide();
 	}
 
@@ -166,6 +174,12 @@ public class GameController : MonoBehaviour
         _mexiController.InitWave(_angryCultures);
 		Debug.Log("[GameController] Audience resetted!");
 	}
+
+    IEnumerator GetNewspaperAnim()
+    {
+
+        yield return new WaitForSeconds(5);
+    }
 
     IEnumerator WaitForTrumpTalks(float time)
     {
