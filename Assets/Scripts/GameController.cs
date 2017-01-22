@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject[] _culturePrefabs;
+
 	[SerializeField]
 	private CameraController _camera;
 
@@ -150,7 +152,14 @@ public class GameController : MonoBehaviour
                             Newspaper.Instance.Show(3f, "Game over!", "Clinton wins! Angels weep!");
                         }
                         else //Depends on haters cultures.
+                        {
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
+                            foreach(Culture angry in _angryCultures)
+                            {
+                                GameObject hater = Instantiate(_mexiController.CulturePrefabs[(int)angry] as GameObject);
+
+                            }
+                        }
                     }
                 });
     }
