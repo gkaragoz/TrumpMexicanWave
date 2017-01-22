@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -35,8 +36,9 @@ public class GameController : MonoBehaviour
 
             if (Life <= 0)
             {
-                _camera.Reset();
-                StartGame();
+                //_camera.Reset();
+                //StartGame();
+				SceneManager.LoadScene("MainMenu");
             }
         }
     }
