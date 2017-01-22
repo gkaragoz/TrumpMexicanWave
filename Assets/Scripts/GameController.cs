@@ -73,6 +73,18 @@ public class GameController : MonoBehaviour
 		//Fade out to black
 		_camera.StartFadeInCor();
 		_fader.interactable = true;
+
+		//We don't want to call this from camera
+		//So we'll just use the magic number 1.0f
+		//which is the duration of the fade out 
+		//coroutine
+		LeanTween.delayedCall( 1.0f,
+				() =>
+				{
+					if(Newspaper.Instance != null)
+						Newspaper.Instance.Show(3f, "Trump does it again!", "Blacks outraged!");
+				});
+
 	}
 
 	//After fading out, the user taps the
@@ -82,6 +94,9 @@ public class GameController : MonoBehaviour
 		_gameInProgress = false;
 		StartGame();
 		_camera.StartFadeOutCor();
+
+		if(Newspaper.Instance != null)
+			Newspaper.Instance.Hide();
 	}
 
 	private void ResetAudience()

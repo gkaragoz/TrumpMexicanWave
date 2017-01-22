@@ -27,10 +27,10 @@ public class Newspaper : MonoBehaviour
 		transform.position = Vector3.zero;
 	}
 
-	void Show (float duration = 1f, string topText = "Trump eats baby", string flavorText = "'Wow, tasty baby!'")
+	public void Show (float duration = 1f, string topText = "Trump eats baby", string flavorText = "'Wow, tasty baby!'")
 	{
 		//Cancel all previously active tweens
-		LeanTween.cancelAll();
+		LeanTween.cancel( gameObject );
 
 		//Reset transform values
 		ResetTransform();
@@ -64,7 +64,7 @@ public class Newspaper : MonoBehaviour
 
 	public void Hide()
 	{
-		LeanTween.cancelAll();
+		LeanTween.cancel( gameObject );
 		ResetTransform();
 		gameObject.SetActive( false );
 	}
