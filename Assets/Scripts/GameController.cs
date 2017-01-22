@@ -170,7 +170,7 @@ public class GameController : MonoBehaviour
 							_uiCultureGOs = new List<GameObject>();
 
 							//Start spawning here
-							Vector3 spawnPoint = new Vector3( Screen.width, Screen.height * -0.5f /* - _uiCulturePrefabs[0].GetComponent<Image>().sprite.rect.height * 0.75f*/, 0f );
+							Vector3 spawnPoint = new Vector3( Screen.width, 0f /*Screen.height * -0.5f*/ /* - _uiCulturePrefabs[0].GetComponent<Image>().sprite.rect.height * 0.75f*/, 0f );
 
                             foreach(Culture angry in _angryCultures)
                             {
@@ -181,11 +181,11 @@ public class GameController : MonoBehaviour
 
 								var rect = hater.GetComponent<Image>().sprite.rect;
 
-								hater.transform.localPosition = spawnPoint;
+								hater.transform.position = spawnPoint;
 								hater.transform.localScale = Vector3.one;
 
 								//LeanTween.moveLocalX( hater, Screen.width * -1.25f, 10f).setEaseInOutCirc();
-								LeanTween.moveLocalX( hater, spawnPoint.x - Screen.width, 10f).setEaseOutCirc();
+								LeanTween.moveX( hater, spawnPoint.x - Screen.width, 10f).setEaseOutCirc();
 								_uiCultureGOs.Add( hater );
 
 								spawnPoint += rect.width * Vector3.right;
