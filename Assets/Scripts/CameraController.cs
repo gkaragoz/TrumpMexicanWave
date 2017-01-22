@@ -140,8 +140,8 @@ public class CameraController : MonoBehaviour {
 
     IEnumerator CameraZoomIn()
     {
-        LeanTween.moveY(gameObject, Camera.main.transform.position.y + 0.75f, 2);
-        LeanTween.value(gameObject, animateOrthographicSize, 5, 3, 2);
+        LeanTween.moveY(gameObject, Camera.main.transform.position.y + 0.6f, 2);
+        LeanTween.value(gameObject, animateOrthographicSize, 5, 4.42f, 2);
 
         yield return new WaitForSeconds(2);
 
@@ -150,8 +150,8 @@ public class CameraController : MonoBehaviour {
 
     IEnumerator CameraZoomOut()
     {
-        LeanTween.moveY(gameObject, Camera.main.transform.position.y - 0.75f, 1);
-        LeanTween.value(gameObject, animateOrthographicSize, 3, 5, 1);
+        LeanTween.moveY(gameObject, Camera.main.transform.position.y - 0.6f, 1);
+        LeanTween.value(gameObject, animateOrthographicSize, 4.42f, 5, 1);
 
         yield return new WaitForSeconds(1);
 
