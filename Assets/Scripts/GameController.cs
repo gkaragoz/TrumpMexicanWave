@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject[] _culturePrefabs;
+	[SerializeField]
+    private GameObject[] _uiCulturePrefabs;
+	private List<GameObject> _uiCultureGOs;
 
 	[SerializeField]
 	private CameraController _camera;
@@ -159,11 +161,35 @@ public class GameController : MonoBehaviour
                             AudioController.Instance.PlayEffect(Effect.FANFARE_3);
 
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
+
+#region Angries display
+							_uiCultureGOs = new List<GameObject>();
+
+							//Start spawning here
+							Vector3 spawnPoint = new Vector3( Screen.width, Screen.height * -1f - _uiCulturePrefabs[0].GetComponent<Image>().sprite.rect.height * 0.75f, 0f );
+
                             foreach(Culture angry in _angryCultures)
                             {
-                                GameObject hater = Instantiate(_mexiController.CulturePrefabs[(int)angry] as GameObject);
+								GameObject prefab = _uiCulturePrefabs[(int)angry];
+                                GameObject hater = Instantiate( prefab );
 
+								hater.transform.SetParent( GameObject.FindObjectOfType<Canvas>().transform, true );
+
+								var rect = hater.GetComponent<Image>().sprite.rect;
+
+								hater.transform.localPosition = spawnPoint;
+								hater.transform.localScale = Vector3.one;
+
+								//LeanTween.moveLocalX( hater, Screen.width * -1.25f, 10f).setEaseInOutCirc();
+								LeanTween.moveLocalX( hater, spawnPoint.x - Screen.width, 10f).setEaseOutCirc();
+								_uiCultureGOs.Add( hater );
+
+								spawnPoint += rect.width * Vector3.right;
+
+								//LeanTween.delayedCall( 3f, () => Destroy(hater) );
+								Debug.Log("SPAWNED A DUDE BREH");
                             }
+#endregion
                         }
                     }
                 });
@@ -173,6 +199,14 @@ public class GameController : MonoBehaviour
 	//newspaper to start the next wave
 	public void OnNewspaperTap()
 	{
+		foreach( var hater in _uiCultureGOs )
+		{
+			LeanTween.cancel( hater );
+			Destroy(hater);
+		}
+
+		_uiCultureGOs.Clear();
+
         if (_gameOver)
         {
             Newspaper.Instance.Hide();
