@@ -28,6 +28,9 @@ public class GameController : MonoBehaviour
 
     private bool _gameOver;
 
+	private string _topNPText;
+	private string _flavorNPText;
+
     public int Life
     {
         get
@@ -109,6 +112,9 @@ public class GameController : MonoBehaviour
 
 		_angryCultures.Add( castedForm );
 
+		_topNPText = TextDictionary.CultureLines[ castedForm ];
+		_flavorNPText = TextDictionary.CultureSubLines[ castedForm ];	
+
 		Debug.Log("[GameController] People who consider themselves to be " + castedForm + " now despise Trump!");
 	}
 
@@ -143,7 +149,7 @@ public class GameController : MonoBehaviour
                             Newspaper.Instance.Show(3f, "Game over!", "You loss!");
                         }
                         else //Depends on haters cultures.
-                            Newspaper.Instance.Show(3f, "Trump does it again!", "Blacks outraged!");
+                            Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
                     }
                 });
     }
