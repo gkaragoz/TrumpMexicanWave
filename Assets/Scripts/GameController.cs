@@ -83,7 +83,7 @@ public class GameController : MonoBehaviour
 	//We're making all caps function names great again
 	void ESCALATE()
 	{
-		_maxAngries += Random.Range(5, 16);
+		_maxAngries += Random.Range(1, 16);
 
 		if(_maxAngries > MAX_ANGRIES_POSSIBLE)
 			_maxAngries = MAX_ANGRIES_POSSIBLE;
@@ -121,6 +121,7 @@ public class GameController : MonoBehaviour
 	private void DoTransition()
 	{
 		_gameInProgress = false;
+		_life = 5;
 		
         CallClickableNewspaper();
 
@@ -146,7 +147,7 @@ public class GameController : MonoBehaviour
                         {
                             _camera.StartTranslate = false;
                             Txt_PlayerLife.text = "";
-                            Newspaper.Instance.Show(3f, "Game over!", "You loss!");
+                            Newspaper.Instance.Show(3f, "Game over!", "Clinton wins! Angels weep!");
                         }
                         else //Depends on haters cultures.
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
