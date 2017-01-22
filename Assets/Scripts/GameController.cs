@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
 	{
+        Camera.main.orthographicSize = 5;
 		_fader.interactable = false;
 		ResetAudience();
 		StartCoroutine( WaitForTrumpTalks( 4f ) );

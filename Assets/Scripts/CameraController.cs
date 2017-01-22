@@ -33,7 +33,7 @@ public class CameraController : MonoBehaviour {
 	public void Reset()
 	{
         StartTranslate = false;
-        isFading = false;
+        //isFading = false;
 
 		Target.transform.position = Vector3.up * Screen.height * 2f;
         Camera.main.transform.position = new Vector3(0, 0, -10);
@@ -86,6 +86,7 @@ public class CameraController : MonoBehaviour {
         isFading = true;
         LeanTween.value(FADE_IN_OUT.gameObject, FadeIn, 0f,1f, 1f);
         yield return new WaitForSeconds(1.5f);
+        isFading = false;
 
 		if( onFinish != null )
 			onFinish();
@@ -103,9 +104,9 @@ public class CameraController : MonoBehaviour {
 
     IEnumerator FadeOut()
     {
+        isFading = true;
         LeanTween.value(FADE_IN_OUT.gameObject, FadeOut, 1f,0f, 1f);
         yield return new WaitForSeconds(1);
-
         isFading = false;
     }
 
