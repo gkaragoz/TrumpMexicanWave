@@ -52,7 +52,9 @@ public class CameraController : MonoBehaviour {
                 //StartCoroutine(CameraZoomOut());
 
 				if(_onGameEnd != null)
+				{
 					_onGameEnd();
+				}
 				else
 					Debug.LogError("[ERROR] You didn't set _onGameEnd, ya dingus!");
             }
@@ -76,30 +78,35 @@ public class CameraController : MonoBehaviour {
         //Newspaper animation.
         yield return new WaitForSeconds(2);
 
-        StartCoroutine(FadeIn());
+        StartCoroutine( FadeIn(_onGameEnd) );
     }
 
-    IEnumerator FadeIn()
+    IEnumerator FadeIn(Action onFinish = null)
     {
         isFading = true;
         LeanTween.value(FADE_IN_OUT.gameObject, FadeIn, 0f,1f, 1f);
         yield return new WaitForSeconds(1.5f);
 
-        StartCoroutine(FadeOut());
+		if( onFinish != null )
+			onFinish();
     }
+
+	public void StartFadeOutCor()
+	{
+		StartCoroutine( FadeOut() );
+	}
+
+	public void StartFadeInCor()
+	{
+		StartCoroutine( FadeIn() );
+	}
 
     IEnumerator FadeOut()
     {
-        //Reset camera.
-        Camera.main.transform.position = new Vector3(0, 0, -10);
-
         LeanTween.value(FADE_IN_OUT.gameObject, FadeOut, 1f,0f, 1f);
         yield return new WaitForSeconds(1);
 
-        LeanTween.cancelAll();
         isFading = false;
-
-        StartCoroutine(WaitForTrumpTalks(4));
     }
 
     //Fade IN animation. Increase the alpha channel on FADE_IN_OUT Image. 
@@ -121,9 +128,6 @@ public class CameraController : MonoBehaviour {
 
         StartTranslate = true;
         Target.transform.position = transform.position;
-
-        //StartCoroutine(MW.LeanTween_StandUp());
-        //StartCoroutine(MW.LeanTween_SitDown());
     }
 
     IEnumerator CameraZoomIn()

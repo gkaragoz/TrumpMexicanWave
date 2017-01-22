@@ -15,6 +15,9 @@ public class GameController : MonoBehaviour
 
     public Text Txt_PlayerLife;
 
+	[SerializeField]
+	private Button _fader;
+
     [SerializeField]
     private int _life;
 
@@ -40,6 +43,7 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
 	{
+		_fader.interactable = false;
 		ResetAudience();
 		StartCoroutine( WaitForTrumpTalks( 4f ) );
 	}
@@ -49,9 +53,24 @@ public class GameController : MonoBehaviour
 		_angryCultures = new List<Culture>();
 		_angryCultures.Add( Culture.MUSLIM );
 
-		_camera.SetOnGameEnd(StartGame);
+		_camera.SetOnGameEnd(DoTransition);
 
 		StartGame();
+	}
+
+	private void DoTransition()
+	{
+		//Fade out to black
+		_camera.StartFadeInCor();
+		_fader.interactable = true;
+	}
+
+	//After fading out, the user taps the
+	//newspaper to start the next wave
+	public void OnNewspaperTap()
+	{
+		StartGame();
+		_camera.StartFadeOutCor();
 	}
 
 	private void ResetAudience()
