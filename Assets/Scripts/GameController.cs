@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public int score;
+
 	[SerializeField]
     private GameObject[] _uiCulturePrefabs;
 	private List<GameObject> _uiCultureGOs;
@@ -65,6 +67,8 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
 	{
+        score = 0;
+
         Camera.main.orthographicSize = 5;
 		_fader.interactable = false;
 		ResetAudience();
@@ -156,7 +160,7 @@ public class GameController : MonoBehaviour
                         {
                             _camera.StartTranslate = false;
                             Txt_PlayerLife.text = "";
-                            Newspaper.Instance.Show(3f, "Game over!", "Clinton wins! Angels weep!");
+                            Newspaper.Instance.Show(3f, "Game over! Your score is: " + score, "Clinton wins! Angels weep!");
 
                             AudioController.Instance.PlayEffect(Effect.FAIL_TRUMPET);
                         }
