@@ -13,6 +13,7 @@ public class MainMenuController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		Debug.Log("[MainMenu] Loaded main menu.");
+        AudioController.Instance.PlayEffect(Effect.HAPPY_OPENING);
+        Debug.Log("[MainMenu] Loaded main menu.");
 	}
 }

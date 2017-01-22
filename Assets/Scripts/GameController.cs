@@ -129,7 +129,7 @@ public class GameController : MonoBehaviour
 
 		ESCALATE();
 	}
-
+    
     public void CallClickableNewspaper()
     {
         //Fade out to black
@@ -145,14 +145,19 @@ public class GameController : MonoBehaviour
                 {
                     if (Newspaper.Instance != null)
                     {
+
                         if (_gameOver)
                         {
                             _camera.StartTranslate = false;
                             Txt_PlayerLife.text = "";
                             Newspaper.Instance.Show(3f, "Game over!", "Clinton wins! Angels weep!");
+
+                            AudioController.Instance.PlayEffect(Effect.FAIL_TRUMPET);
                         }
                         else //Depends on haters cultures.
                         {
+                            AudioController.Instance.PlayEffect(Effect.FANFARE_3);
+
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
                             foreach(Culture angry in _angryCultures)
                             {
@@ -173,6 +178,22 @@ public class GameController : MonoBehaviour
             Newspaper.Instance.Hide();
             SceneManager.LoadScene("MainMenu");
             return;
+        }
+
+        int random = UnityEngine.Random.Range(0, 3);
+        Debug.Log(random);
+
+        switch (random)
+        {
+            case 0:
+                AudioController.Instance.PlayEffect(Effect.APPLAUSE_1);
+                break;
+            case 1:
+                AudioController.Instance.PlayEffect(Effect.APPLAUSE_2);
+                break;
+            case 2:
+                AudioController.Instance.PlayEffect(Effect.APPLAUSE_3);
+                break;
         }
 
         _gameInProgress = false;
