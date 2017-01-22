@@ -81,7 +81,7 @@ public class GameController : MonoBehaviour
 		_maxAngries += Random.Range(5, 16);
 
 		if(_maxAngries > MAX_ANGRIES_POSSIBLE)
-			_maxAngries == MAX_ANGRIES_POSSIBLE;
+			_maxAngries = MAX_ANGRIES_POSSIBLE;
 
 		//5 is the max amount of cultures that can hate trump
 		//...I know, right?
