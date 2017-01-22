@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject[] _culturePrefabs;
+	[SerializeField]
+    private GameObject[] _uiCulturePrefabs;
 
 	[SerializeField]
 	private CameraController _camera;
@@ -156,8 +157,20 @@ public class GameController : MonoBehaviour
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
                             foreach(Culture angry in _angryCultures)
                             {
-                                GameObject hater = Instantiate(_mexiController.CulturePrefabs[(int)angry] as GameObject);
+								GameObject prefab = _uiCulturePrefabs[(int)angry];
+                                GameObject hater = Instantiate( prefab );
 
+								hater.transform.SetParent( GameObject.FindObjectOfType<Canvas>().transform, true );
+
+								var rect = hater.GetComponent<Image>().sprite.rect;
+
+								hater.transform.localPosition = new Vector3( Screen.width + rect.width, Screen.height * -1f - rect.height * 0.75f, 0f );
+								hater.transform.localScale = Vector3.one;
+
+								//LeanTween.moveLocalX( hater, Screen.width * -1.25f, 10f).setEaseInOutCirc();
+								LeanTween.moveLocalX( hater, Screen.width * -1.25f, 10f).setEaseOutCirc();
+								//LeanTween.delayedCall( 3f, () => Destroy(hater) );
+								Debug.Log("SPAWNED A DUDE BREH");
                             }
                         }
                     }

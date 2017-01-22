@@ -156,10 +156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c454e96cdd9cd4983b61b73e810788dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _culturePrefabs:
+  _uiCulturePrefabs:
+  - {fileID: 124824, guid: 3bcc97d3e720bf14188720a9e54a178f, type: 2}
+  - {fileID: 124824, guid: 3bcc97d3e720bf14188720a9e54a178f, type: 2}
   - {fileID: 170588, guid: 28a6b793a656ff841a194652be0ab0fa, type: 2}
   - {fileID: 115644, guid: ed9992fba0342d640b462203d9a5ca3a, type: 2}
-  - {fileID: 124824, guid: 3bcc97d3e720bf14188720a9e54a178f, type: 2}
   - {fileID: 167782, guid: 8086fdc5b5a066b468630f28113aa40b, type: 2}
   - {fileID: 101868, guid: e8a8bfd75e5f7414ebc45487a73b2192, type: 2}
   _camera: {fileID: 420771217}
