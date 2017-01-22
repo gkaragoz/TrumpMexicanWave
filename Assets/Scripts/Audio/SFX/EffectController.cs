@@ -9,11 +9,11 @@ public class EffectController
 		_isSfxOn = true;
 	}
 
-	public void PlayEffect( Effect effect )
+	public void PlayEffect( Effect effect, float volume = 1f )
 	{
 		if ( _isSfxOn )
 		{
-			_player.PlayEffect( effect );
+			_player.PlayEffect( effect, volume );
 		}
 	}
 

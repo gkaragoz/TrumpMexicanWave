@@ -167,7 +167,7 @@ public class GameController : MonoBehaviour
                         }
                         else //Depends on haters cultures.
                         {
-                            AudioController.Instance.PlayEffect(Effect.FANFARE_2);
+                            AudioController.Instance.PlayEffect(Effect.FANFARE_2, 0.1f);
 
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
 
@@ -223,7 +223,7 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        AudioController.Instance.PlayEffect(Effect.APPLAUSE_1);
+        AudioController.Instance.PlayEffect(Effect.APPLAUSE_1, 0.1f);
 
         _gameInProgress = false;
 		StartGame();
@@ -275,7 +275,7 @@ public class GameController : MonoBehaviour
 				break;
 
 			case Culture.WOMEN:
-				AudioController.Instance.PlayEffect(Effect.TRUMP_WOMEN_1);
+				AudioController.Instance.PlayEffect(Effect.TRUMP_WOMEN_1, 8f);
 				break;
 		}
         //Trump talks.

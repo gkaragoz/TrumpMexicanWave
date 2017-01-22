@@ -22,13 +22,13 @@ class EffectPlayer : MonoBehaviour
 		return effectPlayer;
 	}
 
-	public void PlayEffect(Effect effect)
+	public void PlayEffect(Effect effect, float volume = 1f)
 	{
 		AudioClip clip = AudioClipData.GetEffectClip(effect);
 
 		if (clip != null)
 		{
-			Play(clip);
+			Play(clip, volume);
 		}
 	}
 
@@ -69,9 +69,9 @@ class EffectPlayer : MonoBehaviour
 		yield return null;
 	}
 
-	private void Play(AudioClip clip)
+	private void Play(AudioClip clip, float volume = 1.0f)
 	{
-		audioSource.PlayOneShot(clip);
+		audioSource.PlayOneShot(clip, volume);
 	}
 
 	private void PlayDistinctly(AudioClip clip)
