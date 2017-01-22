@@ -35,6 +35,9 @@ public class GameController : MonoBehaviour
 	private string _topNPText;
 	private string _flavorNPText;
 
+	//For trump talks
+	private Culture _lastAngryCulture;
+
     public int Life
     {
         get
@@ -115,6 +118,7 @@ public class GameController : MonoBehaviour
 		}
 
 		_angryCultures.Add( castedForm );
+		_lastAngryCulture = castedForm;
 
 		_topNPText = TextDictionary.CultureLines[ castedForm ];
 		_flavorNPText = TextDictionary.CultureSubLines[ castedForm ];	
@@ -158,7 +162,7 @@ public class GameController : MonoBehaviour
                         }
                         else //Depends on haters cultures.
                         {
-                            AudioController.Instance.PlayEffect(Effect.FANFARE_3);
+                            //AudioController.Instance.PlayEffect(Effect.FANFARE_3);
 
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
 
@@ -220,13 +224,13 @@ public class GameController : MonoBehaviour
         switch (random)
         {
             case 0:
-                AudioController.Instance.PlayEffect(Effect.APPLAUSE_1);
+                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_1);
                 break;
             case 1:
-                AudioController.Instance.PlayEffect(Effect.APPLAUSE_2);
+                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_2);
                 break;
             case 2:
-                AudioController.Instance.PlayEffect(Effect.APPLAUSE_3);
+                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_3);
                 break;
         }
 
@@ -261,6 +265,28 @@ public class GameController : MonoBehaviour
 
     IEnumerator WaitForTrumpTalks(float time)
     {
+		switch( _lastAngryCulture )
+		{
+			case Culture.MEXICAN:
+				AudioController.Instance.PlayEffect( Effect.TRUMP_MEXICANS_1 );
+				break;
+
+			case Culture.AFRICANAMERICAN:
+				AudioController.Instance.PlayEffect( Effect.TRUMP_AFRICANAMERICANS_1 );
+				break;
+
+			case Culture.MUSLIM:
+				AudioController.Instance.PlayEffect( Effect.TRUMP_MUSLIMS_1 );
+				break;
+
+			case Culture.LIBERAL:
+				AudioController.Instance.PlayEffect( Effect.TRUMP_LIBERALS_1 );
+				break;
+
+			case Culture.WOMEN:
+				AudioController.Instance.PlayEffect(Effect.TRUMP_WOMEN_1);
+				break;
+		}
         //Trump talks.
         yield return new WaitForSeconds(time);
 

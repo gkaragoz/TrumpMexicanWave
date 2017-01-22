@@ -138,13 +138,13 @@ public class CameraController : MonoBehaviour {
         switch (random)
         {
             case 0:
-                AudioController.Instance.PlayEffect(Effect.APPLAUSE_1);
+                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_1);
                 break;
             case 1:
-                AudioController.Instance.PlayEffect(Effect.APPLAUSE_2);
+                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_2);
                 break;
             case 2:
-                AudioController.Instance.PlayEffect(Effect.APPLAUSE_3);
+                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_3);
                 break;
         }
 
