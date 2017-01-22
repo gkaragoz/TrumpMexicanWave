@@ -59,7 +59,8 @@ public class GameController : MonoBehaviour
 	void Start ()
 	{
 		_angryCultures = new List<Culture>();
-		_angryCultures.Add( Culture.MUSLIM );
+
+		ESCALATE();
 
 		_camera.SetOnGameEnd(DoTransition);
 
@@ -69,9 +70,31 @@ public class GameController : MonoBehaviour
 	//We're making all caps function names great again
 	void ESCALATE()
 	{
+		//5 is the max amount of cultures that can hate trump
+		//...I know, right?
+		if(_angryCultures.Count >= 5)
+			return;
+
+		//Index 0 in the Culture enum is the neutral guy
+		//So we start at 1, and end at 5
 		int randomCulture = Random.Range(1,6);
+		var castedForm = (Culture) randomCulture;
 
+		while( _angryCultures.Contains( castedForm ) && castedForm == Culture.LIBERAL )
+		{
+			randomCulture++;
 
+			//If we're above the max int in the culture enum
+			//wrap around back to 1
+			if( randomCulture > 5 )
+				randomCulture = 1;
+
+			castedForm = (Culture) randomCulture;
+		}
+
+		_angryCultures.Add( castedForm );
+
+		Debug.Log("[GameController] People who consider themselves to be " + castedForm + " now despise Trump!");
 	}
 
 	private void DoTransition()
@@ -92,6 +115,8 @@ public class GameController : MonoBehaviour
 					if(Newspaper.Instance != null)
 						Newspaper.Instance.Show(3f, "Trump does it again!", "Blacks outraged!");
 				});
+
+		ESCALATE();
 
 	}
 
