@@ -103,7 +103,13 @@ public class GameController : MonoBehaviour
 		//5 is the max amount of cultures that can hate trump
 		//...I know, right?
 		if(_angryCultures.Count >= 5)
+		{
+			_lastAngryCulture = Culture.CAUCASIAN;
+
+			_topNPText = TextDictionary.CultureLines[ Culture.CAUCASIAN ];
+			_flavorNPText = TextDictionary.CultureSubLines[ Culture.CAUCASIAN ];	
 			return;
+		}
 
 		//Index 0 in the Culture enum is the neutral guy
 		//So we start at 1, and end at 5
