@@ -160,6 +160,9 @@ public class GameController : MonoBehaviour
 #region Angries display
 							_uiCultureGOs = new List<GameObject>();
 
+							//Start spawning here
+							Vector3 spawnPoint = new Vector3( Screen.width, Screen.height * -1f - _uiCulturePrefabs[0].GetComponent<Image>().sprite.rect.height * 0.75f, 0f );
+
                             foreach(Culture angry in _angryCultures)
                             {
 								GameObject prefab = _uiCulturePrefabs[(int)angry];
@@ -169,12 +172,15 @@ public class GameController : MonoBehaviour
 
 								var rect = hater.GetComponent<Image>().sprite.rect;
 
-								hater.transform.localPosition = new Vector3( Screen.width + rect.width, Screen.height * -1f - rect.height * 0.75f, 0f );
+								hater.transform.localPosition = spawnPoint;
 								hater.transform.localScale = Vector3.one;
 
 								//LeanTween.moveLocalX( hater, Screen.width * -1.25f, 10f).setEaseInOutCirc();
-								LeanTween.moveLocalX( hater, Screen.width * -1.25f, 10f).setEaseOutCirc();
+								LeanTween.moveLocalX( hater, spawnPoint.x - Screen.width, 10f).setEaseOutCirc();
 								_uiCultureGOs.Add( hater );
+
+								spawnPoint += rect.width * Vector3.right;
+
 								//LeanTween.delayedCall( 3f, () => Destroy(hater) );
 								Debug.Log("SPAWNED A DUDE BREH");
                             }
