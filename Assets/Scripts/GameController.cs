@@ -72,6 +72,14 @@ public class GameController : MonoBehaviour
 		StartGame();
 	}
 
+	//We're making all caps function names great again
+	void ESCALATE()
+	{
+		int randomCulture = Random.Range(1,6);
+
+
+	}
+
 	private void DoTransition()
 	{
 		_gameInProgress = false;
