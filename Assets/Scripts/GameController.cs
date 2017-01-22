@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
 	[SerializeField]
     private GameObject[] _uiCulturePrefabs;
+	private List<GameObject> _uiCultureGOs;
 
 	[SerializeField]
 	private CameraController _camera;
@@ -155,6 +156,10 @@ public class GameController : MonoBehaviour
                         else //Depends on haters cultures.
                         {
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
+
+#region Angries display
+							_uiCultureGOs = new List<GameObject>();
+
                             foreach(Culture angry in _angryCultures)
                             {
 								GameObject prefab = _uiCulturePrefabs[(int)angry];
@@ -169,9 +174,11 @@ public class GameController : MonoBehaviour
 
 								//LeanTween.moveLocalX( hater, Screen.width * -1.25f, 10f).setEaseInOutCirc();
 								LeanTween.moveLocalX( hater, Screen.width * -1.25f, 10f).setEaseOutCirc();
+								_uiCultureGOs.Add( hater );
 								//LeanTween.delayedCall( 3f, () => Destroy(hater) );
 								Debug.Log("SPAWNED A DUDE BREH");
                             }
+#endregion
                         }
                     }
                 });
@@ -181,6 +188,14 @@ public class GameController : MonoBehaviour
 	//newspaper to start the next wave
 	public void OnNewspaperTap()
 	{
+		foreach( var hater in _uiCultureGOs )
+		{
+			LeanTween.cancel( hater );
+			Destroy(hater);
+		}
+
+		_uiCultureGOs.Clear();
+
         if (_gameOver)
         {
             Newspaper.Instance.Hide();
