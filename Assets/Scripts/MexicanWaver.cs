@@ -151,13 +151,14 @@ public class MexicanWaver : MonoBehaviour {
         //3.38f
         float distance = X_StartPosition.transform.position.x - X_EndPosition.transform.position.x;
         float iterationCount = Mathf.Abs (distance / TileBackground.GetComponent<SpriteRenderer>().bounds.size.x);
+        Vector3 startPos = X_StartPosition.transform.position;
 
-        Vector3 v3 = X_StartPosition.transform.position;
+        Vector3 v3 = startPos;
 
-        for (int ii = 0; ii < iterationCount; ii++)
+        for (int ii = 0; ii < iterationCount + 1; ii++)
         {
             GameObject tile = Instantiate(TileBackground, v3, Quaternion.identity) as GameObject;
-            v3 += Vector3.right * ii * tile.GetComponent<SpriteRenderer>().bounds.size.x;
+            v3 = startPos + Vector3.right * ii * tile.GetComponent<SpriteRenderer>().bounds.size.x;
         }
     }
 
