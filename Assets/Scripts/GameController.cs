@@ -67,7 +67,6 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
 	{
-        score = 0;
 
         Camera.main.orthographicSize = 5;
 		_fader.interactable = false;
@@ -82,6 +81,8 @@ public class GameController : MonoBehaviour
 
 	void Start ()
 	{
+        score = 0;
+
 		_angryCultures = new List<Culture>();
 
 		ESCALATE();
