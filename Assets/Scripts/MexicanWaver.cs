@@ -136,8 +136,13 @@ public class MexicanWaver : MonoBehaviour {
 				   viewerController.HatesTrump = true;
 
                 People[ii, jj] = go;
-                go.transform.SetParent(parentObject.transform);     //Set parent for organize hierarchy.
-                v3 += new Vector3(0, RowDistance, 0);               //Set offsets for every Row.
+                go.transform.SetParent(parentObject.transform);                         //Set parent for organize hierarchy.
+
+                float randomSeperatingOnX = Random.Range(-0.3f, 0.3f);
+                v3 += new Vector3(randomSeperatingOnX, RowDistance, 0);             //Set offsets for every Row.
+
+                // -0.3f // +0.3f
+                ///////////////////////////////////////////////////////////////////////////////////////////
             }
             v3 = new Vector3(X_StartPosition.transform.position.x + x_startPosOffset, X_EndPosition.transform.position.y - y_startPosOffset, 0);     //Reset to start position;
             v3 += new Vector3(ColumnDistance * (ii + 1), 0, 0);     //Set offsets for every Column.

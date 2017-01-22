@@ -121,7 +121,7 @@ public class GameController : MonoBehaviour
 	private void DoTransition()
 	{
 		_gameInProgress = false;
-		_life = 5;
+		_life = 10;
 		
         CallClickableNewspaper();
 
@@ -169,7 +169,7 @@ public class GameController : MonoBehaviour
         _gameInProgress = false;
 		StartGame();
         StartCoroutine(WaitForTrumpTalks(4f));
-
+        _camera.Reset();
         _camera.StartFadeOutCor();
 
         if (Newspaper.Instance != null)
@@ -179,7 +179,7 @@ public class GameController : MonoBehaviour
 	private void ResetAudience()
     {
         //Reset life for new wave.
-        Life = 2;
+        Life = 10;
 
 		//Clear people (if any)
 		_mexiController.ClearWave();
