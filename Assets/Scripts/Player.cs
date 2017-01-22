@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
                     var viewer = hit.collider.gameObject.GetComponent<ViewerController>();
                     if (viewer.HatesTrump)
                     {
+                        AudioController.Instance.PlayEffect(Effect.UI_TAP);
                         viewer.StandUpThenDown();
                         viewer.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     }

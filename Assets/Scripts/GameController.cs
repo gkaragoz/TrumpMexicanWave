@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour
 
 	private bool _gameInProgress;
 
+    private bool _gameOver;
+
     public int Life
     {
         get
@@ -41,7 +43,10 @@ public class GameController : MonoBehaviour
                 //_camera.Reset();
                 //StartGame();
 				Debug.Log("Someone set life to 0, aww sheet");
-				SceneManager.LoadScene("MainMenu");
+                //SceneManager.LoadScene("MainMenu");
+
+                _gameOver = true;
+                DoTransition();
             }
         }
     }
@@ -53,6 +58,7 @@ public class GameController : MonoBehaviour
 		ResetAudience();
 		StartCoroutine( WaitForTrumpTalks( 4f ) );
 
+        _gameOver = false;
 		_gameInProgress = true;
 	}
 
@@ -82,8 +88,17 @@ public class GameController : MonoBehaviour
 				() =>
 				{
 					if(Newspaper.Instance != null)
-						Newspaper.Instance.Show(3f, "Trump does it again!", "Blacks outraged!");
-				});
+                    {
+                        if (_gameOver)
+                        {
+                            _camera.StartTranslate = false;
+                            Txt_PlayerLife.text = "";
+						    Newspaper.Instance.Show(3f, "Game over!", "You loss!");
+                        }
+                        else //Depends on haters cultures.
+                            Newspaper.Instance.Show(3f, "Trump does it again!", "Blacks outraged!");
+                    }
+                });
 
 	}
 
@@ -91,12 +106,19 @@ public class GameController : MonoBehaviour
 	//newspaper to start the next wave
 	public void OnNewspaperTap()
 	{
-		_gameInProgress = false;
+        if (_gameOver)
+        {
+            Newspaper.Instance.Hide();
+            SceneManager.LoadScene("MainMenu");
+            return;
+        }
+
+        _gameInProgress = false;
 		StartGame();
 		_camera.StartFadeOutCor();
 
 		if(Newspaper.Instance != null)
-			Newspaper.Instance.Hide();
+                Newspaper.Instance.Hide();
 	}
 
 	private void ResetAudience()
