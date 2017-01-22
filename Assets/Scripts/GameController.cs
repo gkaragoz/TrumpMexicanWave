@@ -188,7 +188,7 @@ public class GameController : MonoBehaviour
 								LeanTween.moveX( hater, spawnPoint.x - Screen.width, 10f).setEaseOutCirc();
 								_uiCultureGOs.Add( hater );
 
-								spawnPoint += rect.width * Vector3.right;
+								spawnPoint += rect.width * 0.5f * Vector3.right;
 
 								//LeanTween.delayedCall( 3f, () => Destroy(hater) );
 								Debug.Log("SPAWNED A DUDE BREH");
