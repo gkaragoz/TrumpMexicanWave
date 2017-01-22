@@ -24,9 +24,9 @@ public class ViewerController : MonoBehaviour
 		}
 	}
 
-	public float Delay = 0.2f;
-	public float StandTime = 0.25f;
-	public float SitTime = 0.25f;
+	private float Delay = 0.45f;
+	public float StandTime = 0.20f;
+	public float SitTime = 0.30f;
 
 	public bool HatesTrump = false;
 
@@ -55,6 +55,7 @@ public class ViewerController : MonoBehaviour
 			gameObject, 
 			transform.position.y + 0.25f, 
 			Random.Range(StandTime, StandTime + StandTime * 1.2f))
+			.setEaseOutCirc()
 			.setOnComplete( SitDown );
 	}
 
@@ -68,10 +69,13 @@ public class ViewerController : MonoBehaviour
 
 	public void SitDown()
 	{
-		LeanTween.moveY(
-			gameObject,
-			transform.position.y - 0.25f,
-			SitTime)
-			.setDelay( Delay );
+		Debug.Log("Sitting down, with a delay of: " + Delay);
+		LeanTween.delayedCall( Delay, () =>
+			LeanTween.moveY(
+				gameObject,
+				transform.position.y - 0.25f,
+				SitTime)
+			.setEaseInOutCubic()
+			);
 	}
 }

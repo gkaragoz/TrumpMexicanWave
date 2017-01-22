@@ -192,6 +192,6 @@ public class CameraController : MonoBehaviour {
 
     public void Tracking()
     {
-        Target.transform.position += Vector3.right * 1.25f * Time.deltaTime;
+        Target.transform.position += Vector3.right * 2.25f * Time.deltaTime;
     }
 }
