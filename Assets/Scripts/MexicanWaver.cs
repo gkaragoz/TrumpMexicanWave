@@ -124,6 +124,12 @@ public class MexicanWaver : MonoBehaviour {
 
                 GameObject go = Instantiate(CulturePrefabs[culture], v3, Quaternion.identity) as GameObject;
 
+				//Doing this check twice, we know.
+				if(!angryCultures.Contains( (Culture) culture ) )
+				{
+					go.layer = 2;
+				}
+
 				//Let them know if they're angry
 				var viewerController = go.GetComponent<ViewerController>();
 				if( angryCultures.Contains( viewerController.ActiveCulture ) )
