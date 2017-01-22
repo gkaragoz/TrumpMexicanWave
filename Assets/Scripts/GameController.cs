@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
 	private MexicanWaver _mexiController;
 
 	private List<Culture> _angryCultures;
+	private int _maxAngries = 20;
+	private readonly int MAX_ANGRIES_POSSIBLE = 40;
 
     public Text Txt_PlayerLife;
 
@@ -78,6 +80,11 @@ public class GameController : MonoBehaviour
 	//We're making all caps function names great again
 	void ESCALATE()
 	{
+		_maxAngries += Random.Range(5, 16);
+
+		if(_maxAngries > MAX_ANGRIES_POSSIBLE)
+			_maxAngries = MAX_ANGRIES_POSSIBLE;
+
 		//5 is the max amount of cultures that can hate trump
 		//...I know, right?
 		if(_angryCultures.Count >= 5)
@@ -171,7 +178,7 @@ public class GameController : MonoBehaviour
 		_mexiController.ClearWave();
 
         //Set up the people
-        _mexiController.InitWave(_angryCultures);
+        _mexiController.InitWave(_angryCultures, _maxAngries);
 		Debug.Log("[GameController] Audience resetted!");
 	}
 
