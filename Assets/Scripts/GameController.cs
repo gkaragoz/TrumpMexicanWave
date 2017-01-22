@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private int _life;
 
+	private bool _gameInProgress;
+
     public int Life
     {
         get
@@ -34,10 +36,11 @@ public class GameController : MonoBehaviour
             _life = value;
             Txt_PlayerLife.text = " Life: " + _life;
 
-            if (Life <= 0)
+            if (Life <= 0 && _gameInProgress)
             {
                 //_camera.Reset();
                 //StartGame();
+				Debug.Log("Someone set life to 0, aww sheet");
 				SceneManager.LoadScene("MainMenu");
             }
         }
@@ -49,6 +52,8 @@ public class GameController : MonoBehaviour
 		_fader.interactable = false;
 		ResetAudience();
 		StartCoroutine( WaitForTrumpTalks( 4f ) );
+
+		_gameInProgress = true;
 	}
 
 	void Start ()
@@ -63,6 +68,8 @@ public class GameController : MonoBehaviour
 
 	private void DoTransition()
 	{
+		_gameInProgress = false;
+		
 		//Fade out to black
 		_camera.StartFadeInCor();
 		_fader.interactable = true;
@@ -72,6 +79,7 @@ public class GameController : MonoBehaviour
 	//newspaper to start the next wave
 	public void OnNewspaperTap()
 	{
+		_gameInProgress = false;
 		StartGame();
 		_camera.StartFadeOutCor();
 	}

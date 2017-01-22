@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour {
     public Image FADE_IN_OUT;
     public bool StartTranslate;
 
+	private bool _gameRunning = false;
+
 	//THIS IS HERE, NOW
 	//DO NOT JUDGE US
 	//WE ARE NOT HORRIBLE PEOPLE
@@ -44,15 +46,20 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	void Update () {
+
+		if(!_gameRunning)
+			return;
+
         if (!isFading)
         {
             if (Camera.main.transform.position.x >= EndPosition.transform.position.x)
             {
-				Reset();
-                //StartCoroutine(CameraZoomOut());
 
 				if(_onGameEnd != null)
 				{
+					_gameRunning = false;
+					StartTranslate = false;
+
 					_onGameEnd();
 				}
 				else
@@ -167,6 +174,14 @@ public class CameraController : MonoBehaviour {
 
 	public void StartCameraZoom()
 	{
+		Reset();
+
+		//Horrible assumption: We only start zooming when
+		//a game begins, so it's safe to assume that we can
+		//set gamerunning to true. Don't hate us we're tired
+		//and out of red bull
+		_gameRunning = true;
+
         StartCoroutine(CameraZoomIn());
 	}
 
