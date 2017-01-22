@@ -160,7 +160,7 @@ public class MexicanWaver : MonoBehaviour {
 
         Vector3 v3 = startPos;
 
-        for (int ii = 0; ii < iterationCount + 1; ii++)
+        for (int ii = 0; ii < iterationCount + 2; ii++)
         {
             GameObject tile = Instantiate(TileBackground, v3, Quaternion.identity) as GameObject;
             v3 = startPos + Vector3.right * ii * tile.GetComponent<SpriteRenderer>().bounds.size.x;
