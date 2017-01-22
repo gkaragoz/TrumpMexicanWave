@@ -133,21 +133,6 @@ public class CameraController : MonoBehaviour {
     {
         LeanTween.moveX(gameObject, StartPosition.transform.position.x, 2).setEase(LeanTweenType.linear);
 
-        int random = UnityEngine.Random.Range(0, 3);
-
-        switch (random)
-        {
-            case 0:
-                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_1);
-                break;
-            case 1:
-                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_2);
-                break;
-            case 2:
-                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_3);
-                break;
-        }
-
         yield return new WaitForSeconds(2);
 
         StartTranslate = true;

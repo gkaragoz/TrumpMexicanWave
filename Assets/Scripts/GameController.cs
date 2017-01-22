@@ -162,7 +162,7 @@ public class GameController : MonoBehaviour
                         }
                         else //Depends on haters cultures.
                         {
-                            //AudioController.Instance.PlayEffect(Effect.FANFARE_3);
+                            AudioController.Instance.PlayEffect(Effect.FANFARE_2);
 
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
 
@@ -218,21 +218,7 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        int random = UnityEngine.Random.Range(0, 3);
-        Debug.Log(random);
-
-        switch (random)
-        {
-            case 0:
-                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_1);
-                break;
-            case 1:
-                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_2);
-                break;
-            case 2:
-                //AudioController.Instance.PlayEffect(Effect.APPLAUSE_3);
-                break;
-        }
+        AudioController.Instance.PlayEffect(Effect.APPLAUSE_1);
 
         _gameInProgress = false;
 		StartGame();
