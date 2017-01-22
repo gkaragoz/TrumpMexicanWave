@@ -166,7 +166,7 @@ public class GameController : MonoBehaviour
 							_uiCultureGOs = new List<GameObject>();
 
 							//Start spawning here
-							Vector3 spawnPoint = new Vector3( Screen.width, Screen.height * -1f - _uiCulturePrefabs[0].GetComponent<Image>().sprite.rect.height * 0.75f, 0f );
+							Vector3 spawnPoint = new Vector3( Screen.width, Screen.height * -0.5f /* - _uiCulturePrefabs[0].GetComponent<Image>().sprite.rect.height * 0.75f*/, 0f );
 
                             foreach(Culture angry in _angryCultures)
                             {
