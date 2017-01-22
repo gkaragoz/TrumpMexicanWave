@@ -6,6 +6,7 @@ public class MexicanWaver : MonoBehaviour {
 	
 	private GameObject _parent;
 
+    public GameObject TileBackground;
     public GameObject[,] People;         //People list which is already instantiated to scene.
     public GameObject[] CulturePrefabs;  //Prefabs list from Resources assets folder.
 
@@ -58,8 +59,10 @@ public class MexicanWaver : MonoBehaviour {
 		_parent = parentObject;
         parentObject.transform.position = Vector3.zero;
 
+
+        //Auto Calculate.
+        //RowDistance = Mathf.Sqrt(Mathf.Pow(Y_StartPosition.transform.position.y - Y_EndPosition.transform.position.y, 2)) / RowCount;       //Calculate offsets between every persons on rows.
         ColumnDistance = Mathf.Sqrt(Mathf.Pow(X_StartPosition.transform.position.x - X_EndPosition.transform.position.x, 2)) / ColumnCount; //Calculate offsets between every persons on columns.
-        RowDistance = Mathf.Sqrt(Mathf.Pow(Y_StartPosition.transform.position.y - Y_EndPosition.transform.position.y, 2)) / RowCount;       //Calculate offsets between every persons on rows.
 
         #region Allignment
         float x_startPosOffset; //Offset for start position on X axis.
@@ -132,6 +135,23 @@ public class MexicanWaver : MonoBehaviour {
             }
             v3 = new Vector3(X_StartPosition.transform.position.x + x_startPosOffset, X_EndPosition.transform.position.y - y_startPosOffset, 0);     //Reset to start position;
             v3 += new Vector3(ColumnDistance * (ii + 1), 0, 0);     //Set offsets for every Column.
+        }
+
+        BackgroundTiler();
+    }
+
+    private void BackgroundTiler()
+    {
+        //3.38f
+        float distance = X_StartPosition.transform.position.x - X_EndPosition.transform.position.x;
+        float iterationCount = Mathf.Abs (distance / TileBackground.GetComponent<SpriteRenderer>().bounds.size.x);
+
+        Vector3 v3 = X_StartPosition.transform.position;
+
+        for (int ii = 0; ii < iterationCount; ii++)
+        {
+            GameObject tile = Instantiate(TileBackground, v3, Quaternion.identity) as GameObject;
+            v3 += Vector3.right * ii * tile.GetComponent<SpriteRenderer>().bounds.size.x;
         }
     }
 
