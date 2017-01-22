@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30331af84185385458a176bc0f1d7832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TileBackground: {fileID: 378670599}
+  TileBackground: {fileID: 133902, guid: 77492dc91e184984c970483077913ea1, type: 2}
   CulturePrefabs:
   - {fileID: 158676, guid: 3cca068a011a54f1d9430947c187326f, type: 2}
   - {fileID: 158676, guid: 82847546029ce4647829a3510ca79885, type: 2}
@@ -281,10 +281,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c775aabf84c3942d882c76ef363bca50, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &378670599 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 133902, guid: 77492dc91e184984c970483077913ea1, type: 2}
-  m_PrefabInternal: {fileID: 548903574}
 --- !u!1 &420771211
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,18 +519,6 @@ Prefab:
     - target: {fileID: 419306, guid: 77492dc91e184984c970483077913ea1, type: 2}
       propertyPath: m_RootOrder
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 419306, guid: 77492dc91e184984c970483077913ea1, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.52352715
-      objectReference: {fileID: 0}
-    - target: {fileID: 419306, guid: 77492dc91e184984c970483077913ea1, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.52352715
-      objectReference: {fileID: 0}
-    - target: {fileID: 419306, guid: 77492dc91e184984c970483077913ea1, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.5816968
       objectReference: {fileID: 0}
     - target: {fileID: 133902, guid: 77492dc91e184984c970483077913ea1, type: 2}
       propertyPath: m_IsActive
