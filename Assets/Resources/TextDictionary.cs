@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public static class TextDictionary : MonoBehaviour
+public static class TextDictionary
 {
 
 	public static Dictionary<Culture,string> CultureLines = 
