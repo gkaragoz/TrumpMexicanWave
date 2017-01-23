@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c454e96cdd9cd4983b61b73e810788dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Trump: {fileID: 1461341027}
+  score: 0
   _uiCulturePrefabs:
   - {fileID: 124824, guid: 3bcc97d3e720bf14188720a9e54a178f, type: 2}
   - {fileID: 124824, guid: 3bcc97d3e720bf14188720a9e54a178f, type: 2}

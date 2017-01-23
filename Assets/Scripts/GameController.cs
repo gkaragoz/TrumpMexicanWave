@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject Trump;
+
     public int score;
 
 	[SerializeField]
@@ -224,9 +227,6 @@ public class GameController : MonoBehaviour
                         }
                     }
                 });
-
-
-
     }
 
 	//After fading out, the user taps the
@@ -270,8 +270,11 @@ public class GameController : MonoBehaviour
         //Reset life for new wave.
         Life = 10;
 
-		//Clear people (if any)
-		_mexiController.ClearWave();
+        //Reset Trump position because new wave is coming.
+        ResetTrumpPosition();
+
+        //Clear people (if any)
+        _mexiController.ClearWave();
 
         //Set up the people
         _mexiController.InitWave(_angryCultures, _maxAngries);
@@ -314,5 +317,18 @@ public class GameController : MonoBehaviour
 
 		//Tell the camera to zoom in...
 		_camera.StartCameraZoom();
+
+        //Trump fall back a little bit, cause player gets better gameplay view
+        FallBackTrump();
+    }
+
+    private void ResetTrumpPosition()
+    {
+        Trump.transform.position = new Vector3(0, -3.43f, -1.65f);
+    }
+
+    private void FallBackTrump()
+    {
+        LeanTween.moveY(Trump, -5.5f, 2).setEaseInOutBack();
     }
 }
