@@ -37,6 +37,8 @@ public class GameController : MonoBehaviour
 	private string _topNPText;
 	private string _flavorNPText;
 
+	private bool _isFirstTime;
+
 	//For trump talks
 	private Culture _lastAngryCulture;
 
@@ -67,13 +69,17 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
 	{
+		if(_gameInProgress)
+			return;
 
         Camera.main.orthographicSize = 5;
-		_fader.interactable = false;
 		ResetAudience();
 
-        if (_gameInProgress)
+        if (_isFirstTime)
+		{
+			_isFirstTime = false;
             CallClickableNewspaper();
+		}
 
         _gameOver = false;
 		_gameInProgress = true;
@@ -81,6 +87,7 @@ public class GameController : MonoBehaviour
 
 	void Start ()
 	{
+		_fader.interactable = false;
         score = 0;
 
 		_angryCultures = new List<Culture>();
@@ -139,6 +146,7 @@ public class GameController : MonoBehaviour
 
 	private void DoTransition()
 	{
+		_fader.interactable = false;
 		_gameInProgress = false;
 		_life = 10;
 		
@@ -151,7 +159,6 @@ public class GameController : MonoBehaviour
     {
         //Fade out to black
         _camera.StartFadeInCor();
-        _fader.interactable = true;
 
         //We don't want to call this from camera
         //So we'll just use the magic number 1.0f
@@ -176,6 +183,9 @@ public class GameController : MonoBehaviour
                             AudioController.Instance.PlayEffect(Effect.FANFARE_2, 0.1f);
 
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
+
+							//Enable the button after the animation has had a chance to play ;)
+							LeanTween.delayedCall( 3f, () => _fader.interactable = true);
 
 #region Angries display
 							_uiCultureGOs = new List<GameObject>();
@@ -208,12 +218,17 @@ public class GameController : MonoBehaviour
                         }
                     }
                 });
+
+
+
     }
 
 	//After fading out, the user taps the
 	//newspaper to start the next wave
 	public void OnNewspaperTap()
 	{
+		_fader.interactable = false;
+
 		foreach( var hater in _uiCultureGOs )
 		{
 			LeanTween.cancel( hater );
@@ -262,6 +277,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator WaitForTrumpTalks(float time)
     {
+		_fader.interactable = false;
 		switch( _lastAngryCulture )
 		{
 			case Culture.MEXICAN:
