@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
 
 	private List<Culture> _angryCultures;
 	private int _maxAngries = 20;
-	private readonly int MAX_ANGRIES_POSSIBLE = 40;
+	private const int MAX_ANGRIES_POSSIBLE = 70;
 
     public Text Txt_PlayerLife;
 
@@ -123,7 +123,7 @@ public class GameController : MonoBehaviour
 		int randomCulture = Random.Range(1,6);
 		var castedForm = (Culture) randomCulture;
 
-		while( _angryCultures.Contains( castedForm ) || castedForm == Culture.LIBERAL )
+		while( _angryCultures.Contains( castedForm ) || castedForm == Culture.CAUCASIAN )
 		{
 			randomCulture++;
 
