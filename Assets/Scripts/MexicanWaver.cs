@@ -54,6 +54,7 @@ public class MexicanWaver : MonoBehaviour {
 
     public void InitWave(List<Culture> angryCultures, int maxAngries = 10)   //Instantiate every persons depends on ColumnCount and RowCount.
     {
+		Debug.Log("[MexicanWaver] Spawning wave!");
         //Declare parent object for instantiating people to organize hierarchy.
         GameObject parentObject = new GameObject("People");
 		_parent = parentObject;
@@ -149,6 +150,7 @@ public class MexicanWaver : MonoBehaviour {
         }
 
         BackgroundTiler();
+		Debug.Log("[MexicanWaver] Finished spawning wave!");
     }
 
     private void BackgroundTiler()

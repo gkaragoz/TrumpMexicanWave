@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
 
 	private List<Culture> _angryCultures;
 	private int _maxAngries = 20;
-	private readonly int MAX_ANGRIES_POSSIBLE = 40;
+	private const int MAX_ANGRIES_POSSIBLE = 70;
 
     public Text Txt_PlayerLife;
 
@@ -36,6 +36,11 @@ public class GameController : MonoBehaviour
 
 	private string _topNPText;
 	private string _flavorNPText;
+
+	private bool _isFirstTime;
+	//Filthy hack! I hate myself for this
+	//oh build a wall between me and my shame
+	private bool _newspaperTapped;
 
 	//For trump talks
 	private Culture _lastAngryCulture;
@@ -67,13 +72,17 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
 	{
+		if(_gameInProgress)
+			return;
 
         Camera.main.orthographicSize = 5;
-		_fader.interactable = false;
 		ResetAudience();
 
-        if (_gameInProgress)
+        if (_isFirstTime)
+		{
+			_isFirstTime = false;
             CallClickableNewspaper();
+		}
 
         _gameOver = false;
 		_gameInProgress = true;
@@ -81,6 +90,7 @@ public class GameController : MonoBehaviour
 
 	void Start ()
 	{
+		_fader.interactable = false;
         score = 0;
 
 		_angryCultures = new List<Culture>();
@@ -116,7 +126,7 @@ public class GameController : MonoBehaviour
 		int randomCulture = Random.Range(1,6);
 		var castedForm = (Culture) randomCulture;
 
-		while( _angryCultures.Contains( castedForm ) || castedForm == Culture.LIBERAL )
+		while( _angryCultures.Contains( castedForm ) || castedForm == Culture.CAUCASIAN )
 		{
 			randomCulture++;
 
@@ -139,6 +149,9 @@ public class GameController : MonoBehaviour
 
 	private void DoTransition()
 	{
+		_newspaperTapped = false;
+
+		_fader.interactable = false;
 		_gameInProgress = false;
 		_life = 10;
 		
@@ -151,7 +164,6 @@ public class GameController : MonoBehaviour
     {
         //Fade out to black
         _camera.StartFadeInCor();
-        _fader.interactable = true;
 
         //We don't want to call this from camera
         //So we'll just use the magic number 1.0f
@@ -176,6 +188,10 @@ public class GameController : MonoBehaviour
                             AudioController.Instance.PlayEffect(Effect.FANFARE_2, 0.1f);
 
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
+
+							//Enable the button after the animation has had a chance to play ;)
+							if(_isFirstTime)
+								LeanTween.delayedCall( 3f, () => _fader.interactable = true );
 
 #region Angries display
 							_uiCultureGOs = new List<GameObject>();
@@ -208,12 +224,20 @@ public class GameController : MonoBehaviour
                         }
                     }
                 });
+
+
+
     }
 
 	//After fading out, the user taps the
 	//newspaper to start the next wave
 	public void OnNewspaperTap()
 	{
+		if(_newspaperTapped)
+			return;
+
+		_fader.interactable = false;
+
 		foreach( var hater in _uiCultureGOs )
 		{
 			LeanTween.cancel( hater );
@@ -262,6 +286,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator WaitForTrumpTalks(float time)
     {
+		_fader.interactable = false;
 		switch( _lastAngryCulture )
 		{
 			case Culture.MEXICAN:

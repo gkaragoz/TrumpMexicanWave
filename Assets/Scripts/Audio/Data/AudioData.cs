@@ -30,7 +30,7 @@ public class AudioData : ScriptableObject
 			{ Effect.NONE, null },
 			{ Effect.UI_TAP, UI_TAP },
 			{ Effect.GAME_START, GAME_START },
-			{ Effect.TRUMP_MEXICANS_1, TRUMP_MUSLIMS_1 },
+			{ Effect.TRUMP_MEXICANS_1, TRUMP_MEXICANS_1 },
 			{ Effect.TRUMP_AFRICANAMERICANS_1, TRUMP_AFRICANAMERICANS_1},
 			{ Effect.TRUMP_WOMEN_1, TRUMP_WOMEN_1},
 			{ Effect.TRUMP_LIBERALS_1, TRUMP_LIBERALS_1},
