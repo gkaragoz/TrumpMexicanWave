@@ -19,6 +19,8 @@ public class Player : MonoBehaviour {
                     {
                         GameObject.Find("GameManager").GetComponent<GameController>().score++;
                         AudioController.Instance.PlayEffect(Effect.UI_TAP);
+                        ParticleController.Instance.ParticleItRandomly(viewer.transform.position);
+
                         viewer.StandUpThenDown();
                         viewer.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     }
