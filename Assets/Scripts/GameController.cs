@@ -38,6 +38,9 @@ public class GameController : MonoBehaviour
 	private string _flavorNPText;
 
 	private bool _isFirstTime;
+	//Filthy hack! I hate myself for this
+	//oh build a wall between me and my shame
+	private bool _newspaperTapped;
 
 	//For trump talks
 	private Culture _lastAngryCulture;
@@ -146,6 +149,8 @@ public class GameController : MonoBehaviour
 
 	private void DoTransition()
 	{
+		_newspaperTapped = false;
+
 		_fader.interactable = false;
 		_gameInProgress = false;
 		_life = 10;
@@ -185,7 +190,8 @@ public class GameController : MonoBehaviour
                             Newspaper.Instance.Show(3f, _topNPText, _flavorNPText);
 
 							//Enable the button after the animation has had a chance to play ;)
-							LeanTween.delayedCall( 3f, () => _fader.interactable = true);
+							if(_isFirstTime)
+								LeanTween.delayedCall( 3f, () => _fader.interactable = true );
 
 #region Angries display
 							_uiCultureGOs = new List<GameObject>();
@@ -227,6 +233,9 @@ public class GameController : MonoBehaviour
 	//newspaper to start the next wave
 	public void OnNewspaperTap()
 	{
+		if(_newspaperTapped)
+			return;
+
 		_fader.interactable = false;
 
 		foreach( var hater in _uiCultureGOs )
