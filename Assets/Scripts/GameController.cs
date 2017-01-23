@@ -116,7 +116,7 @@ public class GameController : MonoBehaviour
 		int randomCulture = Random.Range(1,6);
 		var castedForm = (Culture) randomCulture;
 
-		while( _angryCultures.Contains( castedForm ) && castedForm == Culture.LIBERAL )
+		while( _angryCultures.Contains( castedForm ) || castedForm == Culture.LIBERAL )
 		{
 			randomCulture++;
 
