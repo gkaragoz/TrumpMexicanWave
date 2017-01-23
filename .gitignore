@@ -5,3 +5,7 @@ Sailman.io*
 *.sln
 *.sublime-workspace
 *.sublime-project
+*.DS_Store
+*/*.DS_Store
+*.userprefs
+*.apk

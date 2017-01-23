@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e645dba77e2204bfd8828d959813de0f, type: 3}
+  m_Name: AudioData
+  m_EditorClassIdentifier: 
+  UI_TAP: {fileID: 8300000, guid: 7769594d61a4a4c46ac5868ba43e3e45, type: 3}
+  GAME_START: {fileID: 8300000, guid: c7439c47b27694886983b8f03c1f8447, type: 3}
+  TRUMP_MEXICANS_1: {fileID: 8300000, guid: a51e5d7509a5944528ff75302e642367, type: 3}
+  TRUMP_AFRICANAMERICANS_1: {fileID: 8300000, guid: 7761b8cde1e324844989488d09c43f83,
+    type: 3}
+  TRUMP_WOMEN_1: {fileID: 8300000, guid: 4237e487088ca425b940a7a3619a162a, type: 3}
+  TRUMP_LIBERALS_1: {fileID: 8300000, guid: 8e78eedee56cc4d23873068aec0759fb, type: 3}
+  TRUMP_MUSLIMS_1: {fileID: 8300000, guid: 49cb4d2f51d2641249c23b885041d907, type: 3}
+  APPLAUSE_1: {fileID: 8300000, guid: aa7ae7b0ced004a0da3b5ddbd97baeb1, type: 3}
+  APPLAUSE_2: {fileID: 8300000, guid: 04928c4b0030a455a91b07c09b8213b9, type: 3}
+  APPLAUSE_3: {fileID: 8300000, guid: 9ac4fb1d589d34d5a994f950381dafb0, type: 3}
+  CHEERING: {fileID: 8300000, guid: 5b88cb67221614ff9b1a6831843648f3, type: 3}
+  FAIL_TRUMPET: {fileID: 8300000, guid: ea5d9747894724c72bcb4e1b8861d6c7, type: 3}
+  FANFARE_JAZZ: {fileID: 8300000, guid: 5b2972eef434441b6a055fd161ae9358, type: 3}
+  FANFARE_2: {fileID: 8300000, guid: 9eaf6834d73fd40c9a6a7788b9a534d4, type: 3}
+  FANFARE_3: {fileID: 8300000, guid: 2a3b01df01ffb478cb649ff9a59c9eee, type: 3}
+  HAPPY_OPENING: {fileID: 8300000, guid: 74ed50e2ef1b245efb8739b78a357fd4, type: 3}
+  SHORT_FAIL: {fileID: 8300000, guid: 3a0af4ce8e3b5403fb89034ee1656c2d, type: 3}
