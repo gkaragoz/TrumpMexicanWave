@@ -9,7 +9,15 @@ public class EffectController
 		_isSfxOn = true;
 	}
 
-	public void PlayEffect( Effect effect, float volume = 1f )
+    public void PlayEffectInLoop(Effect effect, float volume = 1f)
+    {
+        if ( _isSfxOn )
+        {
+            _player.PlayEffectInLoop(effect, volume);
+        }
+    }
+
+    public void PlayEffect( Effect effect, float volume = 1f )
 	{
 		if ( _isSfxOn )
 		{

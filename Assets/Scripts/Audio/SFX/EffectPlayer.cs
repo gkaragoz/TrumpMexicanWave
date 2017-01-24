@@ -22,7 +22,34 @@ class EffectPlayer : MonoBehaviour
 		return effectPlayer;
 	}
 
-	public void PlayEffect(Effect effect, float volume = 1f)
+    public void PlayEffectInLoop(Effect effect, float volume = 1f)
+    {
+        AudioClip clip = AudioClipData.GetEffectClip(effect);
+
+        if (clip != null)
+        {
+            Play(clip, volume);
+        }
+
+        StartCoroutine(PlayEffectForever(effect, volume));
+    }
+
+    private IEnumerator PlayEffectForever(Effect effect, float volume = 1f)
+    {
+        AudioClip clip = AudioClipData.GetEffectClip(effect);
+
+        if (clip != null)
+        {
+            Play(clip, volume);
+        }
+
+        while (audioSource.isPlaying)
+            yield return null;
+
+        PlayEffectInLoop(effect, volume);
+    }
+
+    public void PlayEffect(Effect effect, float volume = 1f)
 	{
 		AudioClip clip = AudioClipData.GetEffectClip(effect);
 
@@ -74,7 +101,7 @@ class EffectPlayer : MonoBehaviour
 		audioSource.PlayOneShot(clip, volume);
 	}
 
-	private void PlayDistinctly(AudioClip clip)
+    private void PlayDistinctly(AudioClip clip)
 	{
 		throw new NotImplementedException("We don't support playing raw AudioClips disntinctly, yet. Please use an Effect for this, instead.");
 	}

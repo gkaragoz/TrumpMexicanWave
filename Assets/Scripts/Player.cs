@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
+    public ParticleController ParticleController;
+
     void Update () {
         if (Input.GetMouseButtonDown(0))
         {
@@ -19,7 +21,7 @@ public class Player : MonoBehaviour {
                     {
                         GameObject.Find("GameManager").GetComponent<GameController>().score++;
                         AudioController.Instance.PlayEffect(Effect.UI_TAP);
-                        ParticleController.Instance.ParticleItRandomly(viewer.transform.position);
+                        ParticleController.ParticleItRandomly(viewer.transform.position);
 
                         viewer.StandUpThenDown();
                         viewer.gameObject.GetComponent<BoxCollider2D>().enabled = false;
