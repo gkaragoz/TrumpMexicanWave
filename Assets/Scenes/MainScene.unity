@@ -182,10 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c0f14f967d8a6940a1146c5bf24e6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParticleEffects:
-  - {fileID: 100004, guid: f5f7e00efce43d14e8031b86e15adf69, type: 2}
-  - {fileID: 100008, guid: af217e9297b42fa48a25dd77cf925e8e, type: 2}
-  - {fileID: 100000, guid: ec182370bace4e5418865277a87ba86f, type: 2}
+  Particles: []
 --- !u!1 &315098113
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,9 +210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c0f14f967d8a6940a1146c5bf24e6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParticleEffects:
-  - {fileID: 100004, guid: f5f7e00efce43d14e8031b86e15adf69, type: 2}
+  Particles:
   - {fileID: 100008, guid: af217e9297b42fa48a25dd77cf925e8e, type: 2}
+  - {fileID: 100004, guid: f5f7e00efce43d14e8031b86e15adf69, type: 2}
 --- !u!4 &315098115
 Transform:
   m_ObjectHideFlags: 0
@@ -636,6 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd376d0d732f384da728adca1e02b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParticleController: {fileID: 315098114}
 --- !u!4 &997549701
 Transform:
   m_ObjectHideFlags: 0
